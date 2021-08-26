@@ -3,6 +3,11 @@ body {
     font-family: verdana;
     text-align: center;
     color: #333333;
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-touch-callout:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
 }
 h1{
     font-family: verdana;
