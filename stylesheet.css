@@ -1,0 +1,16 @@
+body {
+    background-color: #646464;
+    font-family: verdana;
+    text-align: center;
+    color: #333333;
+}
+h1{
+    font-family: verdana;
+    font-size: 240px;
+}
+p{
+    font-family: Trebuchet MS;
+    font-size: 80px;
+
+    transform:translate(0, -100%);
+}
