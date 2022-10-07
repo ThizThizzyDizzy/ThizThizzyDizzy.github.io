@@ -2,43 +2,24 @@ body {
     background-color: #646464;
     font-family: verdana;
     text-align: center;
-    color: #333333;
-    user-select:none;
-    -webkit-user-select:none;
-    -webkit-touch-callout:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
+    color: #222222;
 }
 h1{
-    font-family: verdana;
-    font-size: 80px;
-}
-h2{
-    font-family: Trebuchet MS;
     font-size: 60px;
 }
+h2{
+    font-size: 30px;
+}
+h3{
+    font-size: 15px;
+}
+h4{
+    font-size: 25px;
+}
+h5{
+    font-size: 22px;
+}
 p{
-    font-family: Trebuchet MS;
-    font-size: 35px;
-}
-a{
-    font-family: Trebuchet MS;
-    font-size: 40px;
-    /*color: #333333;*/
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
-}
-a:link{
-    color: #4a0dc5;
-}
-a:visited{
-    color: #551A8B;
-}
-a:hover{
-    
-}
-a:active{
-    
+    font-size: 20px;
+    line-height: 2;
 }
