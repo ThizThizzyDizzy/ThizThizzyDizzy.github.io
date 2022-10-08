@@ -1,0 +1,25 @@
+body {
+    background-color: #EEEEEE;
+    font-family: verdana;
+    text-align: center;
+    color: #111111;
+}
+h1{
+    font-size: 60px;
+}
+h2{
+    font-size: 30px;
+}
+h3{
+    font-size: 15px;
+}
+h4{
+    font-size: 25px;
+}
+h5{
+    font-size: 22px;
+}
+p{
+    font-size: 20px;
+    line-height: 2;
+}
