@@ -30,27 +30,15 @@
             </p>
             <div style='display: grid; grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));'>
                 <div>
-                    <h2>Graphics</h2>
+                    <h2>Audio/Visual</h2>
                     <div style='display: grid; grid-auto-flow: column;'>
-                        <canvas id="graphics" width="100" height="100" style="max-width: 200px;"></canvas>
+                        <canvas id="audioVisual" width="100" height="100" style="max-width: 200px;"></canvas>
                         <p>
-                            Graphics covers the amount of detail present in shaders, textures, and other elements.
+                            Covers graphical effects such as shaders and textures, as well as audio such as music and ambience.
                         </p>
                     </div>
                     <script>
-                        genEndpointSignificanceChart("graphics", "alyx", "graphics");
-                    </script>
-                </div>
-                <div>
-                    <h2>Audio</h2>
-                    <div style='display: grid; grid-auto-flow: column;'>
-                        <canvas id="audio" width="100" height="100" style="max-width: 200px;"></canvas>
-                        <p>
-                            Audio covers music, ambience, and other sound effects.
-                        </p>
-                    </div>
-                    <script>
-                        genEndpointSignificanceChart("audio", "alyx", "audio");
+                        genEndpointSignificanceChart("audioVisual", "alyx", "audioVisual");
                     </script>
                 </div>
                 <div>
