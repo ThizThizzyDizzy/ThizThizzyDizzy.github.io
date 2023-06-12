@@ -1,0 +1,22 @@
+/* styles.css, thx chadGPT */
+
+/* Reset default browser styles for better consistency */
+body,
+div,
+img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+body {
+    font-family: Consolas, monospace;
+  }
+
+/* Define the image class */
+.image {
+  float: left;
+  margin-right: 10px;
+}
