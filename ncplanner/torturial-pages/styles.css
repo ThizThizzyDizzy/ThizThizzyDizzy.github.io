@@ -14,6 +14,7 @@ img {
 body {
     font-family: Consolas, monospace;
     margin: 20px; /* Add margin to the body element */
+    font-size: 20px;
   }
 
 /* Define the image class */
@@ -22,6 +23,7 @@ body {
   max-width: 100%;
   max-height: 100%;
   image-rendering: pixelated; /* or crisp-edges */
+  text-align: center; /* Center the image and description */
 }
 
 .image-grid4 {
@@ -38,9 +40,29 @@ body {
   text-align: center;
 }
 
+.image-grid7 {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Adjust the number of columns as needed */
+  /*gap: 20px; /* Adjust the gap between images */
+}
+
+.image-grid7 > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .description {
   text-align: center;
   margin-top: 10px;
+}
+
+.desc2{
+  text-align: center;
+  margin-top: 5px;
+  font-size: 10px;
 }
 
 table {
@@ -58,4 +80,8 @@ th, td {
   display: flex;
   flex-wrap: wrap;
   margin: -5px; /* Negative margin to remove whitespace */
+}
+
+.tiny {
+  font-size: 8px;
 }
