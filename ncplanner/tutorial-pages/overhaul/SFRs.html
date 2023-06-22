@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../textures/icon.png" type="image/x-icon">
+    <title>Overhaul Solid-Fueled Fission Reactors</title>
+  </head>
+  <body>
+        <h1>Overhaul Solid-Fuel Fission Reactors</h1>
+
+        <img class="image" src="../textures/overhaul/example_sfr.png" alt="Example SFR">
+
+        <h2>External Structure</h2>
+        Overhaul SFRs are built with a cuboidal casing. The edges must be Reactor Casings, but the faces can also be made with Reactor Glass. <br>
+        Fuel can be piped in/out via Fission Fuel Cell Ports placed in the casing. <br>
+        Coolant can be piped in/out via Fission Reactor Vents. <br>
+        Right click any port or vent to switch in between Input and Output mode. In output mode, they will push their contents to adjacent pipes or inventories. (Do not use servos or similar, as they will limit the output rate) <br>
+        Items from irradiator recipes can be piped in/out via a Neutron Irradiator Port. <br>
+        Neutron sources are placed in the casing. (seen behind the levers above) <br>
+        To turn on a reactor, provide it with fuel, coolant, and a redstone signal to all neutron sources. <br>
+        To turn off a reactor, the design must include Neutron Shields, which can be toggled with a Fission Neutron Shield Manager. (see Neutron Shields below for more info) Alternatively you can let the fuel cells run out of fuel. This might lead to meltdowns if not all of them run out at the same time though.
+
+        <h2>Coolant</h2>
+        Coolant is inserted via a Fission Reactor Vent.
+        <table>
+            <tr>
+                <th>Input</th>
+                <th>Output</th>
+                <th>Heat</th>
+                <th>Output Ratio</th>
+            </tr>
+            <tr>
+                <td>Water</td>
+                <td>High Pressure Steam</td>
+                <td>64</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Preheated Water</td>
+                <td>High Pressure Steam</td>
+                <td>32</td>
+                <td>4</td>
+            </tr>
+        </table>
+        Actual values may vary based on mod configuration.
+
+        <h2>Fuels</h2>
+        Fuel Pellets are inserted via a Fission Fuel Cell Port. <br>
+        Each fuel has 4 stats: <br>
+        Efficiency: The base efficiency of the fuel <br>
+        Base Heat: The base heat generation of the fuel <br>
+        Criticality: The amount of neutron flux required to activate a fuel cell <br>
+        Base Time: The time, in ticks, that one fuel pellet will last in one fuel cell <br>
+        Some fuels are also self-priming, so they do not require neutron sources.
+
+        <h2>Internal Structure</h2>
+        Every Fission reactor contains Fuel Cell, Moderators, and Heat sinks. They may also contain Reflectors, Irradiators, Neutron Shields, and Conductors.
+
+        <div class="image-grid7">
+            <img class="image" src="../textures/overhaul/cell.png" width="64">
+            <img class="image" src="../textures/overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures/overhaul/beryllium-carbon.png" width="64">
+            <img class="image" src="../textures/overhaul/irradiator.png" width="64">
+            <img class="image" src="../textures/overhaul/boron-silver.png" width="64">
+            <img class="image" src="../textures/overhaul/water.png" width="64">
+            <img class="image" src="../textures/overhaul/conductor.png" width="64">
+            <p class="description">Fuel Cell</p>
+            <p class="description">Heavy Water Moderator</p>
+            <p class="description">Beryllium-Carbon Reflector</p>
+            <p class="description">Neutron Irradiator</p>
+            <p class="description">Boron-Silver Neutron Shield</p>
+            <p class="description">Water Heat Sink</p>
+            <p class="description">Conductor</p>
+        </div>
+
+        <h3>Fuel Cells</h3>
+        Each fuel cell can have a different fuel. To filter a fuel cell or port, right click with a fuel pellet (filtered cells are accessed through filtered ports) <br>
+        Fuel cells must be activated for the reactor to start. They are activated, when they receive enough neutron flux. (when flux >= fuel criticality) <br>
+        Neutron flux spreads through the reactor's core through moderator lines. Neutron flux originates from cells that are primed with a neutron source. To prime a cell, place a neutron source on the casing with line-of-sight to the cell you want to prime. (Line-of-sight is obstructed by cells, reflectors, and irradiators, but not by heat sinks, moderators, or conductors) <br>
+        You can also prime a cell in the planner by shift-clicking it.<br>
+        For example: <br><br>
+
+        <div class="image-row">
+            <div class="image">
+                <img class="image" src="../textures/overhaul/casing.png" width="64">
+                <p class="desc2">Casing</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/beryllium-carbon.png" width="64">
+                <p class="desc2">Reflector</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/beryllium.png" width="64">
+                <p class="desc2">Moderator</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/cell.png" width="64">
+                <p class="desc2">Fuel Cell</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/graphite.png" width="64">
+                <p class="desc2">Moderator</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/graphite.png" width="64">
+                <p class="desc2">Moderator</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/graphite.png" width="64">
+                <p class="desc2">Moderator</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/cell.png" width="64">
+                <p class="desc2">Fuel Cell</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/water.png" width="64">
+                <p class="desc2">Heat Sink</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/copper.png" width="64">
+                <p class="desc2">Heat Sink</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/cf-252.png" width="64">
+                <p class="desc2">Neutron Source</p>
+            </div>
+
+        </div>
+
+        The leftmost cell has no LOS, but the rightmost cell has LOS to the source on the right. <br><br>
+        Once a cell is activated, it will transmit neutron flux through all its moderator lines. Fuel cells will not stay active unless they have enough sustained neutron flux from other active cells. <br>
+        Cells gain a heat multiplier and efficiency multiplier from all connected moderator lines. The heat multiplier is equal to the number of adjacent moderator lines, while the positional efficiency is the sum of each line's average efficiency. <br>
+        The total efficiency multiplier is the positional efficiency multiplied by fuel efficiency. <br>
+        For example:
+        <br><br>
+        <div class="image-row">
+            <div class="image">
+                <img class="image" src="../textures/overhaul/cell.png" width="64">
+                <p class="desc2">Fuel Cell</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/graphite.png" width="64">
+                <p class="desc2">Graphite</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/graphite.png" width="64">
+                <p class="desc2">Graphite</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/graphite.png" width="64">
+                <p class="desc2">Graphite</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/graphite.png" width="64">
+                <p class="desc2">Graphite</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/cell.png" width="64">
+                <p class="desc2">Fuel Cell</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/graphite.png" width="64">
+                <p class="desc2">Graphite</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/beryllium.png" width="64">
+                <p class="desc2">Beryllium</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/beryllium.png" width="64">
+                <p class="desc2">Beryllium</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/graphite.png" width="64">
+                <p class="desc2">Graphite</p>
+            </div>
+
+            <div class="image">
+                <img class="image" src="../textures/overhaul/cell.png" width="64">
+                <p class="desc2">Fuel Cell</p>
+            </div>            
+        
+        </div>
+
+        The fuel cell in the center has 2 adjacent moderator lines, thus has a heat multiplier of 200%. The left moderator line has an average efficiency factor of 1.1, while the right moderator line has an average efficiency factor of 1.075. The positional efficiency of the center fuel cell is calculated to be 2.175. <br>
+        Actual values may vary based on mod configuration.
+
+        <h3>Moderators</h3>
+        Moderators transmit neutron flux between Fuel Cells, Reflectors, and Irradiators. Each moderator has a Flux factor and an Efficiency factor. Moderator lines can be a maximum of 4 blocks long. Here is a list of all moderators' stats:
+
+        <table>
+            <tr>
+                <th>Moderator</th>
+                <th>Flux Factor</th>
+                <th>Efficiency Factor</th>
+            </tr>
+            <tr>
+                <th><img class="image" src="../textures/overhaul/graphite.png" width="32"> Graphite Moderator</th>
+                <th>10</th>
+                <th>1.1</th>
+            </tr>
+            <tr>
+                <th><img class="image" src="../textures/overhaul/beryllium.png" width="32"> Beryllium Moderator</th>
+                <th>22</th>
+                <th>1.05</th>
+            </tr>
+            <tr>
+                <th><img class="image" src="../textures/overhaul/heavy water.png" width="32"> Heavy Water Moderator</th>
+                <th>36</th>
+                <th>1</th>
+            </tr>
+        </table>
+        Actual values may vary based on mod configuration. <br><br>
+        The total flux of a moderator line is the sum of each moderator's flux factor. <br>
+        The total efficiency of a moderator line is the average of each moderator's efficiency factor. <br>
+        For example: <br><br>
+        <div class="image-row">
+            <img class="image" src="../textures//overhaul/cell.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/cell.png" width="64">
+        </div><br>
+        This moderator line has a flux factor of 92 = 10 + 36 + 10 + 36 and an efficiency of 105% = (1.1 + 1.0 + 1.1 + 1.0)/4 <br>
+        The ends of moderator lines can also support heat sinks, but only if they are adjacent to a cell. (shown below as beryllium)<br><br>
+
+        <div class="image-row">
+            <img class="image" src="../textures//overhaul/cell.png" width="64">
+            <img class="image" src="../textures//overhaul/beryllium.png" width="64">
+            <img class="image" src="../textures//overhaul/beryllium.png" width="64">
+            <img class="image" src="../textures//overhaul/cell.png" width="64">
+            <img class="image" src="../textures//overhaul/beryllium.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/beryllium.png" width="64">
+            <img class="image" src="../textures//overhaul/cell.png" width="64">
+            <img class="image" src="../textures//overhaul/beryllium.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/beryllium-carbon.png" width="64">
+        </div><br>
+
+        <h3>Reflectors</h3>
+        Reflectors will reflect neutron flux back to cells through moderator lines. <br>
+        Each reflector has a Reflectivity and Efficiency factor. <br>
+        Moderator lines to reflectors can only be 2 blocks long, as the neutron flux is traveling to the reflector, then back. (a total of 4 blocks) <br>
+        The Neutron flux of these moderators is also doubled for the same reason. <br>
+        The moderator line's neutron flux is then multiplied by the reflector's reflectivity. <br>
+        The moderator line's efficiency is also multiplied by the reflector's efficiency. <br>
+        Here is a list of all reflectors' stats:<br>
+        <table>
+            <tr>
+                <th>Reflector</th>
+                <th>Reflectivity</th>
+                <th>Efficiency Factor</th>
+            </tr>
+            <tr>
+                <th><img class="image" src="../textures/overhaul/lead-steel.png" width="32"> Lead-Steel</th>
+                <th>0.5</th>
+                <th>0.25</th>
+            </tr>
+            <tr>
+                <th><img class="image" src="../textures/overhaul/beryllium-carbon.png" width="32"> Beryllium-Carbon</th>
+                <th>1</th>
+                <th>0.5</th>
+            </tr>
+        </table>
+        Actual values may vary based on mod configuration. <br><br>
+
+        For example: <br><br>
+        <div class="image-row">
+            <img class="image" src="../textures//overhaul/beryllium-carbon.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/cell.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/lead-steel.png" width="64">
+        </div><br>
+        The moderator line on the left provides 40 = (10 + 10)*2*1 neutron flux and has an efficiency of 55% = (1.1 + 1.1)/2*0.5, while the moderator line on the right provides 72 = (36 + 36)*2*0.5 neutron flux and has an efficiency of 25% = (1 + 1)/2*0.25.
+
+        <h3>Irradiators</h3>
+        Irradiators are placed in a reactor to perform recipes using neutron flux. Irradiators are placed at the end of a moderator line. Each irradiator recipe requires a specific amount of neutrons, so more neutron flux will speed up the recipe. (although one moderator is enough for a very slow irradiator) <br>
+        For example: <br><br>
+        <div class="image-row">
+            <img class="image" src="../textures//overhaul/cell.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/irradiator.png" width="64">
+        </div><br>
+
+        The irradiator above will receive 144 neutron flux from the fuel cell. (the fuel cell gains no flux from this moderator line) <br>
+        Each Irradiator recipe has an efficiency multiplier. The moderator line's efficiency is multiplied by the irradiator recipe's efficiency multiplier. <br>
+        Irradiator recipes can also produce heat. If so, the irradiator will generate heat for each point of neutron flux provided to the irradiator. <br>
+        Here is a list of all Irradiator recipes' stats: <br>
+        <table>
+            <tr>
+                <th>Input</th>
+                <th>Output</th>
+                <th>Efficiency</th>
+                <th>Heat Per Flux</th>
+            </tr>
+            <tr>
+                <td>Thorium</td>
+                <td>Protactinium-Enriched Thorium</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Protactinium-Enriched Thorium</td>
+                <td>Protactinium-233</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Bismuth Dust</td>
+                <td>Polonium Dust</td>
+                <td>0.5</td>
+                <td>0</td>
+            </tr>
+        </table>
+        Actual values may vary based on mod configuration. <br>
+
+        <h3>Neutron Shields</h3>
+        Neutron shields can be used to toggle moderator lines and shut down reactors. Neutron shields can be placed in place of any moderator, though they have a neutron flux of 0. The shield efficiency is also used as moderator efficiency. <br>
+        Here is a list of all shields' stats:
+        <table>
+            <tr>
+                <th>Shield</th>
+                <th>Efficiency</th>
+                <th>Heat Per Flux</th>
+            </tr>
+            <tr>
+                <td><img class="image" src="../textures/overhaul/boron-silver.png" width="32"> Boron-Silver</td>
+                <td>0.5</td>
+                <td>5</td>
+            </tr>
+        </table>
+        Shields generate heat for each point of neutron flux passing through them. Only some of this heat will count towards heating coolant. (Heat*shield efficiency) Shields can be closed with a Shield Controller, which will shut downs its moderator line, blocking neutron flux from neighboring cells. If a cell's flux falls below its criticality, it will shut down as well. <br>
+        For example:<br><br>
+        <div class="image-row">
+            <img class="image" src="../textures/overhaul/beryllium-carbon.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/boron-silver.png" width="64">
+            <img class="image" src="../textures//overhaul/cell.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/boron-silver.png" width="64">
+            <img class="image" src="../textures//overhaul/graphite.png" width="64">
+            <img class="image" src="../textures//overhaul/cell.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/boron-silver.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/heavy water.png" width="64">
+            <img class="image" src="../textures//overhaul/irradiator.png" width="64">
+        </div><br><br>
+        The left shield will generate 100 heat, from 20 flux passing through it. (10 on the way to the reflector, 10 on the way back) <br>
+        The middle shield will generate 150 heat, from the 30 flux passing through it. (20 from the left, 10 from the right) <br>
+        The right shield will generate 180 heat, from the 36 flux passing through it. (the moderators to its right do not provide it flux, as the irradiator absorbs it)
+
+        <h3>Heat Sinks</h3>
+        Heat Sinks are placed in the reactor to cool it down. Each Heat Sink has placement rules and a cooling rate. Ifi ts rules are met, the Heat Sink becomes active, and can support other Sinks. <br>
+        Here is a list of all Heat Sinks and their stats:
+        
+        <table>
+            <tr>
+                <th>Heat Sink</th>
+                <th>Cooling Rate</th>
+                <th>Requirements</th>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/water.png" width="32"> Water Heat Sink
+                </td>
+                <td>55 H/t</td>
+                <td>1 Fuel Cell</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/iron.png" width="32"> Iron Heat Sink
+                </td>
+                <td>50 H/t</td>
+                <td>1 Moderator</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/redstone.png" width="32"> Redstone Heat Sink
+                </td>
+                <td>85 H/t</td>
+                <td>1 Fuel Cell and 1 Moderator</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/quartz.png" width="32"> Quartz Heat Sink
+                </td>
+                <td>80 H/t</td>
+                <td>1 Redstone Heat Sink</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/obsidian.png" width="32"> Obsidian Heat Sink
+                </td>
+                <td>70 H/t</td>
+                <td>Axial Glowstone Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/nether brick.png" width="32"> Nether Brick Heat Sink
+                </td>
+                <td>105 H/t</td>
+                <td>1 Obsidian Heat Sink</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/glowstone.png" width="32"> Glowstone Heat Sink
+                </td>
+                <td>90 H/t</td>
+                <td>2 Moderators</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/lapis.png" width="32"> Lapis Heat Sink
+                </td>
+                <td>100 H/t</td>
+                <td>1 Fuel Cell and 1 Casing</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/gold.png" width="32"> Gold Heat Sink
+                </td>
+                <td>110 H/t</td>
+                <td>Exactly 2 Iron Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/prismarine.png" width="32"> Prismarine Heat Sink
+                </td>
+                <td>115 H/t</td>
+                <td>2 Water Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/slime.png" width="32"> Slime Heat Sink
+                </td>
+                <td>145 H/t</td>
+                <td>Exactly 1 Water and 2 Lead Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/end stone.png" width="32"> End Stone Heat Sink
+                </td>
+                <td>65 H/t</td>
+                <td>1 Reflector</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/purpur.png" width="32"> Purpur Heat Sink
+                </td>
+                <td>95 H/t</td>
+                <td>1 Reflector and 1 Iron Heat Sink</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/diamond.png" width="32"> Diamond Heat Sink
+                </td>
+                <td>200 H/t</td>
+                <td>1 Fuel Cell and 1 Gold Heat Sink</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/emerald.png" width="32"> Emerald Heat Sink
+                </td>
+                <td>195 H/t</td>
+                <td>1 Moderator and 1 Prismarine Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/copper.png" width="32"> Copper Heat Sink
+                </td>
+                <td>75 H/t</td>
+                <td>1 Water Heat Sink</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/tin.png" width="32"> Tin Heat Sink
+                </td>
+                <td>120 H/t</td>
+                <td>Axial Lapis Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/lead.png" width="32"> Lead Heat Sink
+                </td>
+                <td>60 H/t</td>
+                <td>1 Iron Heat Sink</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/boron.png" width="32"> Boron Heat Sink
+                </td>
+                <td>160 H/t</td>
+                <td>1 Quartz Heat Sink and 1 Casing</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/lithium.png" width="32"> Lithium Heat Sink
+                </td>
+                <td>130 H/t</td>
+                <td>Exact-Axial Lead Heat Sinks and 1 Casing</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/magnesium.png" width="32"> Magnesium Heat Sink
+                </td>
+                <td>125 H/t</td>
+                <td>Exactly 1 Moderator and 1 Casing</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/manganese.png" width="32"> Manganese Heat Sink
+                </td>
+                <td>150 H/t</td>
+                <td>2 Fuel Cell</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/aluminum.png" width="32"> Aluminum Heat Sink
+                </td>
+                <td>175 H/t</td>
+                <td>1 Quartz and 1 Lapis Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/silver.png" width="32"> Silver Heat Sink
+                </td>
+                <td>170 H/t</td>
+                <td>2 Glowstone and 1 Tin Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/fluorite.png" width="32"> Fluorite Heat Sink
+                </td>
+                <td>165 H/t</td>
+                <td>1 Gold and 1 Prismarine Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/villiaumite.png" width="32"> Villiaumite Heat Sink
+                </td>
+                <td>180 H/t</td>
+                <td>1 Redstone and 1 End Stone Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/carobbiite.png" width="32"> Carobbiite Heat Sink
+                </td>
+                <td>140 H/t</td>
+                <td>1 End Stone and 1 Copper Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/arsenic.png" width="32"> Arsenic Heat Sink
+                </td>
+                <td>135 H/t</td>
+                <td>Axial Reflectors</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/nitrogen.png" width="32"> Liquid Nitrogen Heat Sink
+                </td>
+                <td>185 H/t</td>
+                <td>2 Copper and 1 Purpur Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/helium.png" width="32"> Liquid Helium Heat Sink
+                </td>
+                <td>190 H/t</td>
+                <td>Exactly 2 Redstone Heat Sinks</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/enderium.png" width="32"> Enderium Heat Sink
+                </td>
+                <td>155 H/t</td>
+                <td>3 Moderators</td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="image" src="../textures/overhaul/cryotheum.png" width="32"> Cryotheum Heat Sink
+                </td>
+                <td>205 H/t</td>
+                <td>3 Fuel Cells</td>
+            </tr>
+        </table>
+        Actual values may vary based on mod configuration. <br>
+        There are a few types of placement rules: <br>
+        '2 Fuel Cells' requires 2 or more fuel cells directly adjacent to this heat sink. <br>
+        'Exactly 2 Redstone Heat Sinks' requires exactly 2 adjacent Redstone Heat Sink. <br>
+        'Axial Lapis Heat Sinks' requires 2 lapis heat sinks on opposite sides. (There can be more than 2 lapis heat sinks, but at least 2 of them must be on opposite sides)<br>
+        'Exactly-Axial Lead Heat Sinks' requires exactly 2 lead heat sinks on opposite sides. (There can not be more than 2 adjacent lead heat sinks) <br>
+        Note that you cannot have casing blocks inside the reactor; Heat Sinks that require casings must be on the outer edges of the reactor.
+
+        <h3>Clusters</h3>
+        Clusters are groups of cells, irradiators, shields, heat sinks that are connected together. Every cluster must be connected to the casing. Clusters can be connected to each other and to the casing with Conductors. <br>
+        If a cluster has a net of >10, all its fuel cells will run through fuel faster than normal. (The cluster will also melt down once its heat buffer fills up) <br>
+        If a cluster has a net heat of <-10, it will get an extra penalty to efficiency. <br>
+        Actual values may vary based on mod configuration.
+
+        <h3>Sparsity Penalty</h3>
+        If the reactor is less than 75% full of functional blocks, it will get an extra penalty to efficiency. Functional blocks include all valid cells, moderators, reflectors, irradiators, shields, and heat sinks, but not conductors. <br>
+        Actual values may vary based on mod configuration.
+
+
+  </body>
+</html>

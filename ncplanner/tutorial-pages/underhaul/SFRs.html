@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../textures/icon.png" type="image/x-icon">
+    <title>Underhaul Solid-Fuel Fission Reactors</title>
+  </head>
+  <body>
+        <h1>
+            Underhaul Solid-Fuel Fission Reactors
+        </h1>
+            <img class="image" src="../textures/underhaul/example_sfr.png" alt="Example SFR">
+            <h2>External Structure</h2>
+            Underhaul SFRs are built with a cuboidal Casing (without edges). Transparent and standard casings are interchangeable. The Fission Controller can be placed on any edge or corner of the casing. Fuel and power can be piped in/ out of the controller, or any Fission Reactor Port. (Ports can be used in place of a casing block, excluding the top and bottom faces) <br>
+            The reactor can be turned on with a redstone signal to the controller. A comparator will read the total heat (if net heat > 0) or power (if net heat <= 0) stored in the reactor.
+
+            <h2>Fuels</h2>
+            Fuels are inserted directly into the reactor controller or through a reactor port. <br>
+            Each fuel has 3 stats: <br>
+            <b>Base Power:</b> The base power generation per cell (in RF/t) <br>
+            <b>Base Heat:</b> the base heat generation per cell. <br>
+            <b>Base Time:</b> The time, in ticks, that one fuel item will last in one fuel cell. <br>
+
+            <h2>Internal Structure</h2>
+            Fission reactors are composed of Fuel Cells, Moderators, and Coolers. <br>
+            <div class="image-grid4">
+              <img class="image" src="../textures/underhaul/cell.png" alt="Reactor Cell" width="64" height="64">
+              <img class="image" src="../textures/underhaul/graphite.png" alt="Reactor Cell" width="64" height="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" alt="Reactor Cell" width="64" height="64">
+              <img class="image" src="../textures/underhaul/water.png" alt="Reactor Cell" width="64" height="64">
+              <p class="description">Reactor Cell <br>(Fuel Cell)</p>
+              <p class="description">Graphite Block <br>(Moderator)</p>
+              <p class="description">Beryllium Block <br>(Moderator)</p>
+              <p class="description">Water Cooler <br>(Cooler)</p>
+            </div>
+            Graphite and Beryllium are functionally identical.
+            
+            <h3>Fuel Cells</h3>
+            Fuel cells and Moderators make up the "Core" of every reactor. Fuel cells have no special requirements, and can be placed anywhere. If placed adjacent to each other, separated by up to 4 moderators, cells will generate extra energy and heat. Energy increases linearly by 100% for each adjacent cell. The base heat multiplier is (n+1)(n+2)/2, where n is the number of adjacent cells.
+
+            <table>
+              <tr>
+                <th>Number of adjacent cells</th>
+                <th>Efficiency multiplier</th>
+                <th>Heat multiplier</th>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>100%</td>
+                <td>100%</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>200%</td>
+                <td>300%</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>300%</td>
+                <td>600%</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>400%</td>
+                <td>1000%</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>500%</td>
+                <td>1500%</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>600%</td>
+                <td>2100%</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>700%</td>
+                <td>2800%</td>
+              </tr>
+            </table>
+            Actual values may vary based on mod configuration.
+            <br><br>
+            For example:
+            <br><br>
+            <div class="image-row">
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+              <div style="width:32px"></div>
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+            </div><br>
+            Each cell above will receive a bonus for 1 adjacent cell.
+
+            <h2>Moderators</h2>
+            Moderators not only link cells together (as seen above), but also provide extra efficiency and heat bonuses to adjacent cells. (Moderators do not have to form a line between cells) The moderator efficiency and heat bonuses are both linear. With n adjacent moderators, the efficiency bonus is n/6, while the heat bonus is n/3.
+            <table>
+              <tr>
+                <th>Number of adjacent cells</th>
+                <th>Efficiency increase</th>
+                <th>Heat increase</th>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>0%</td>
+                <td>0%</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>17%</td>
+                <td>33%</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>33%</td>
+                <td>67%</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>50%</td>
+                <td>100%</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>67%</td>
+                <td>133%</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>83%</td>
+                <td>167%</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>100%</td>
+                <td>200%</td>
+              </tr>
+            </table>
+            Actual values may vary based on mod configuration.
+            <br><br>
+            For Example:
+            <br><br>
+            <div class="image-row">
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+              <img class="image" src="../textures/underhaul/graphite.png" width="64">
+              <div style="width:32px"></div>
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+              <img class="image" src="../textures/underhaul/graphite.png" width="64">
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+              <div style="width:64px"></div>
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+              <img class="image" src="../textures/underhaul/graphite.png" width="64">
+              <img class="image" src="../textures/underhaul/graphite.png" width="64">
+              <img class="image" src="../textures/underhaul/graphite.png" width="64">
+              <img class="image" src="../textures/underhaul/graphite.png" width="64">
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+            </div><br>
+            Each cell above will receive a bonus for 1 adjacent moderator. <br><br>
+            Moderators can also support coolers, but only if they are adjacent to a cell. (shown below as beryllium)
+            <br><br>
+            <div class="image-row">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/graphite.png" width="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/graphite.png" width="64">
+              <img class="image" src="../textures/underhaul/graphite.png" width="64">
+              <img class="image" src="../textures/underhaul/beryllium.png" width="64">
+              <img class="image" src="../textures/underhaul/cell.png" width="64">
+            </div><br>
+
+            <h2>Coolers</h2>
+            Coolers are placed in the reactor to cool it down. Each cooler has placement rules and a cooling rate. If its rules are met, the cooler becomes active, and can support other coolers. <br>
+            Here is a list of all coolers and their stats:
+            <table>
+              <tr>
+                <th>Cooler</th>
+                <th>Cooling Rate</th>
+                <th>Requirements</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/water.png" width="32"> Water Cooler
+                </th>
+                <th>60 H/t</th>
+                <th>1 Fuel Cell or 1 Moderator</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/redstone.png" width="32"> Redstone Cooler
+                </th>
+                <th>90 H/t</th>
+                <th>1 Fuel Cell</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/quartz.png" width="32"> Quartz Cooler
+                </th>
+                <th>90 H/t</th>
+                <th>1 Moderator</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/gold.png" width="32"> Gold Cooler
+                </th>
+                <th>120 H/t</th>
+                <th>1 Water Cooler and 1 Redstone Cooler</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/glowstone.png" width="32"> Glowstone Cooler
+                </th>
+                <th>130 H/t</th>
+                <th>2 Moderators</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" title="lat. lapis = stone; discarding the lazuli is a bad habit" src="../textures/underhaul/lapis.png" width="32">Lapis Cooler
+                </th>
+                <th>120 H/t</th>
+                <th>1 Fuel Cell and 1 Casing</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/diamond.png" width="32"> Diamond Cooler
+                </th>
+                <th>150 H/t</th>
+                <th>1 Water Cooler and 1 Quartz Cooler</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/helium.png" width="32"> Helium Cooler
+                </th>
+                <th>140 H/t</th>
+                <th>Exactly 1 Redstone Cooler and 1 Casing</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/enderium.png" width="32"> Enderium Cooler
+                </th>
+                <th>120 H/t</th>
+                <th>Exactly 3 casings at one vertex</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/cryotheum.png" width="32"> Cryotheum Cooler
+                </th>
+                <th>160 H/t</th>
+                <th>2 Fuel Cells</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/iron.png" width="32"> Iron Cooler
+                </th>
+                <th>80 H/t</th>
+                <th>1 Gold Cooler</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/emerald.png" width="32"> Emerald Cooler
+                </th>
+                <th>160 H/t</th>
+                <th>1 Moderator and 1 Fuel Cell</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/copper.png" width="32"> Copper Cooler
+                </th>
+                <th>80 H/t</th>
+                <th>1 Glowstone Cooler</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/tin.png" width="32"> Tin Cooler
+                </th>
+                <th>120 H/t</th>
+                <th>Axial Lapis Coolers</th>
+              </tr>
+              <tr>
+                <th>
+                  <img class="image" src="../textures/underhaul/magnesium.png" width="32"> Magnesium Cooler
+                </th>
+                <th>110 H/t</th>
+                <th>1 Casing and 1 Moderator</th>
+              </tr>
+            </table>
+            Actual values may vary based on mod configuration <br><br>
+
+            There are a few types of placement rules: <br>
+            '2 Fuel Cells' requires 2 or more fuel cells directly adjacent to this cooler.<br>
+            'Exactly 1 Redstone Cooler' requires exactly 1 Redstone Cooler directly adjacent.<br>
+            'Axial Lapis Cooler' requires 2 lapis coolers on opposite sides of this cooler. (There can be more than 2 lapis coolers, but at least 2 of them must be on opposite sides)<br>
+            'Exactly 3 Casings at one vertex' Requires exactly 3 casings that meet at one corner of this cooler. This means the enderium coolers can only be placed in the corners of reactors that are 2x2x2 or larger. <br>
+            Note that you cannot have casing blocks inside the reactor; Coolers that require casings must be on the outer edges of the reactor.
+
+            <h2>Active Cooling</h2>
+            Active Coolers require a constant flow of liquid, but provide a massive boost in cooling. Most active coolers require the molten form of their passive counterpart. (ex. Active Iron Coolers require Molten Iron). However, Active Enderium Coolers require Molten Ender Pearls instead of Molten Enderium. <br>
+            Active Coolers require 10mb/s of fluid (0.5mb/t). <br>
+            Active Coolers have the same placement requirements as their passive counterparts, but they cannot support other coolers. <br>
+            In the planner, active coolers are separate blocks, but ingame, there is only one "Active Cooler" block that you can feed any of these fluids into.
+  </body>
+</html>
