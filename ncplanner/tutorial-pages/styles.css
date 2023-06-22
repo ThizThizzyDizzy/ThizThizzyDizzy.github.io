@@ -1,0 +1,73 @@
+/* styles.css, thx chadGPT */
+
+/* Reset default browser styles for better consistency */
+body,
+div,
+img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+body {
+    font-family: Consolas, monospace;
+    margin: 20px; /* Add margin to the body element */
+    font-size: 20px;
+  }
+
+/* Define the image class */
+.image {
+  float: left;
+  max-width: 100%;
+  max-height: 100%;
+  image-rendering: pixelated; /* or crisp-edges */
+  text-align: center; /* Center the image and description */
+}
+
+.image-grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Adjust the number of columns as needed */
+  /*gap: 20px; /* Adjust the gap between images */
+  place-items: center;
+}
+
+.image-grid7 {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Adjust the number of columns as needed */
+  place-items: center;
+  /*gap: 20px; /* Adjust the gap between images */
+}
+
+.description {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.desc2{
+  text-align: center;
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center; /* Center the content horizontally */
+}
+
+.image-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -5px; /* Negative margin to remove whitespace */
+}
+
+.tiny {
+  font-size: 8px;
+}
