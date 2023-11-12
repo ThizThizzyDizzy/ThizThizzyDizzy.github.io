@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Underhaul SFR</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Sarabun&display=swap" rel="stylesheet">
+        <style>
+            body{
+                background-color: #DDDDDD
+            }
+        </style>
+    </head>
+    <body>
+        <a class="button-link" href="./">
+            <div class="button">
+                Back
+            </div>
+        </a>
+        <h1>Underhaul SFR</h1>
+        <div class="floating">
+            <img src="img/underhaul_sfr.png" alt="Example Underhaul SFR">
+            <p>Example Underhaul SFR</p>
+        </div>
+        <h2>External Structure</h2>
+        <p>Underhaul SFRs are built with a cuboidal casing (without edges). Transparent and standard casings are interchangable.</p>
+        <p>The Fission Controller can be placed on any edge or corner of the casing.</p>
+        <p>Fuel and power can be piped in/out of the controller, or any Fission Reactor Port. (Ports can be used in place of any casing block, except in the top and bottom faces)</p>
+        <p>The reactor can be turned on with a redstone signal to the controller. A comparator will read the total heat (if <span class=expression>net heat > 0</span>) or power (if <span class=expression>net heat &lt;= 0</span>) stored in the reactor.</p>
+        <h2>Fuels</h2>
+        <p>Fuels are inserted directly into the reactor controller or through a reactor port.</p>
+        <p>Each Fuel has 3 stats:</p>
+        <ul>
+            <li><span class=variable>Base Power</span>: The base power generation per cell (in RF/t)</li>
+            <li><span class=variable>Base Heat</span>: The base heat generation per cell</li>
+            <li><span class=variable>Base Time</span>: the time, in ticks, that one fuel item will last in a reactor with one fuel cell.
+        </ul>
+        <h2>Internal Structure</h2>
+        <p>Fission reactors are composed of Fuel Cells, Moderators, and Coolers.</p>
+        <p>Fuel Cells and Moderators make up the "Core" of every reactor.</p>
+        <table class="borderless">
+            <tr>
+                <td><img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell"></td>
+                <td><img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator"></td>
+                <td><img src="img/blocks/underhaul_sfr/beryllium.png" alt="Graphite Moderator"></td>
+                <td><img src="img/blocks/underhaul_sfr/water.png" alt="Water Cooler"></td>
+            </tr>
+            <tr>
+                <td>Reactor Cell<br>(Fuel Cell)</td>
+                <td>Graphite Block<br>(Moderator)</td>
+                <td>Beryllium Block<br>(Moderator)</td>
+                <td>Water Cooler<br>(Cooler)</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <p>Graphite and Beryllium moderators are functionally identical</p>
+                </td>
+            </tr>
+        </table>
+        <h3>Fuel Cells</h3>
+        <p>Fuel cells have no special requirements, and can be placed anywhere within the reactor. If placed adjacent to each other, separated by up to 4 moderators, cells will generate extra energy and heat.</p>
+        <p>Energy increases linearly by <span class="expression">100%</span> for each adjacent cell.</p>
+        <p>The base heat multiplier is <span class="expression">(n+1)(n+2)/2</span>, where <span class="variable">n</span> is the number of adjacent cells.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Adjacent cells</th>
+                    <th>Efficiency multiplier</th>
+                    <th>Heat multiplier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>200%</td>
+                    <td>300%</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>300%</td>
+                    <td>600%</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>400%</td>
+                    <td>1000%</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>500%</td>
+                    <td>1500%</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>600%</td>
+                    <td>2100%</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>700%</td>
+                    <td>2800%</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <p>Actual values may vary based on mod configuration</p>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>For example, each cell below will receive a bonus for 1 adjacent cell.</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+            <div>
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+        </div>
+        <h3>Moderators</h3>
+        <p>Moderators not only link cells together, as seen above, but also provide extra efficiency and heat bonuses to adjacent cells. They do not have to be between cells for this bonus to apply.</p>
+        <p>The moderator efficiency and heat bonuses are both linear. With <span class="variable">n</span> adjacent moderators, the efficiency bonus is <span class="expression">n/6</span>, while the heat bonus is <span class="expression">n/3</span></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Adjacent cells</th>
+                    <th>Efficiency bonus</th>
+                    <th>Heat bonus</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>0%</td>
+                    <td>0%</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>17%</td>
+                    <td>33%</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>33%</td>
+                    <td>67%</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>50%</td>
+                    <td>100%</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>67%</td>
+                    <td>133%</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>83%</td>
+                    <td>167%</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>100%</td>
+                    <td>200%</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <p>(Shown values are rounded to the nearest percent)</p>
+                        <p>Actual values may vary based on mod configuration</p>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>For example, each cell below will receive a bonus for 1 adjacent moderator.</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+            </div>
+            <div>
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+            <div>
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+        </div>
+        <p>Moderators can only support coolers if they are adjacent to a cell.</p>
+        <p>For example, the beryllium moderators below can support coolers, but the graphite moderators cannot.</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/underhaul_sfr/beryllium.png" alt="Beryllium Moderator">
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/underhaul_sfr/beryllium.png" alt="Beryllium Moderator">
+                <img src="img/blocks/underhaul_sfr/beryllium.png" alt="Beryllium Moderator">
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+            <div>
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/underhaul_sfr/beryllium.png" alt="Beryllium Moderator">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/underhaul_sfr/beryllium.png" alt="Beryllium Moderator">
+                <img src="img/blocks/underhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+        </div>
+        <h3>Coolers</h3>
+        <p>Coolers are placed in the reactor to cool it down. Each cooler has placement rules and a cooling rate. If its rules are met, the cooler becomes active and can support other coolers.</p>
+        <p>Here is a list of all coolers and their stats:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cooler</th>
+                    <th>Cooling Rate</th>
+                    <th>Requirements</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/water.png" alt="Water Cooler">
+                        Water Cooler
+                    </td>
+                    <td>60 H/t</td>
+                    <td>1 Fuel Cell or 1 Moderator</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/redstone.png" alt="Redstone Cooler">
+                        Redstone Cooler
+                    </td>
+                    <td>90 H/t</td>
+                    <td>1 Fuel Cell</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/quartz.png" alt="Quartz Cooler">
+                        Quartz Cooler
+                    </td>
+                    <td>90 H/t</td>
+                    <td>1 Moderator</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/gold.png" alt="Gold Cooler">
+                        Gold Cooler
+                    </td>
+                    <td>120 H/t</td>
+                    <td>1 Water Cooler and 1 Redstone Cooler</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/glowstone.png" alt="Glowstone Cooler">
+                        Glowstone Cooler
+                    </td>
+                    <td>130 H/t</td>
+                    <td>2 Moderators</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/lapis.png" alt="Lapis Cooler">
+                        Lapis Cooler
+                    </td>
+                    <td>120 H/t</td>
+                    <td>1 Fuel Cell and 1 Casing</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/diamond.png" alt="Diamond Cooler">
+                        Diamond Cooler
+                    </td>
+                    <td>150 H/t</td>
+                    <td>1 Water Cooler and 1 Quartz Cooler</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/helium.png" alt="Helium Cooler">
+                        Helium Cooler
+                    </td>
+                    <td>140 H/t</td>
+                    <td>Exactly 1 Redstone Cooler and 1 Casing</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/enderium.png" alt="Enderium Cooler">
+                        Enderium Cooler
+                    </td>
+                    <td>120 H/t</td>
+                    <td>Exactly 3 Casing at one vertex</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/cryotheum.png" alt="Cryoethum Cooler">
+                        Cryotheum Cooler
+                    </td>
+                    <td>160 H/t</td>
+                    <td>2 Fuel Cells</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/iron.png" alt="Iron Cooler">
+                        Iron Cooler
+                    </td>
+                    <td>80 H/t</td>
+                    <td>1 Gold Cooler</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/emerald.png" alt="Emerald Cooler">
+                        Emerald Cooler
+                    </td>
+                    <td>160 H/t</td>
+                    <td>1 Moderator and 1 Fuel Cell</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/copper.png" alt="Copper Cooler">
+                        Copper Cooler
+                    </td>
+                    <td>80 H/t</td>
+                    <td>1 Glowstone Cooler</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/tin.png" alt="Tin Cooler">
+                        Tin Cooler
+                    </td>
+                    <td>120 H/t</td>
+                    <td>Axial Lapis Coolers</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/underhaul_sfr/magnesium.png" alt="Magnesium Cooler">
+                        Magnesium Cooler
+                    </td>
+                    <td>110 H/t</td>
+                    <td>1 Casing and 1 Moderator</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <p>Actual values may vary based on mod configuration</p>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>There are a few types of placement rules:</p>
+        <ul>
+            <li><span class="expression">2 Fuel Cells</span> requires 2 or more fuel cells directly adjacent to this cooler</li>
+            <li><span class="expression">Exactly 1 Redstone Cooler</span> requires exactly 1 redstone cooler directly adjacent to this cooler</li>
+            <li><span class="expression">Axial Lapis Coolers</span> requires 2 lapis coolers on opposite sides of this cooler. There can be more than 2 lapis coolers, but at least 2 must be on opposite sides</li>
+            <li><span class="expression">Exactly 3 Casing at one vertex</span> requires exactly 3 adjacent casings, and that they must meet at one corner of this cooler. This means that the cooler can only be placed in the corner of a reactor that is 2x2x2 or larger.</li>
+        </ul>
+        <p>Note that you cannot have casing blocks inside the reactor. Coolers that require casings must be on the outer edges of the reactor.</p>
+        <h3>Active Cooling</h3>
+        <p>Active coolers require a constant flow of liquid, but provide a massive boost in cooling. Most active coolers require the molten form of their passive counterparts. (For example, active iron coolers require molten iron). Active Enderium Coolers are the exception to this, using molten ender pearls intead of molten enderium.</p>
+        <p>Active coolers require <span class="expression">10mb/s</span> of fluid (<span class="expression">0.5mb/t</span>)</p>
+        <p>Active coolers have the same placement requirements as their passive counterparts, but they cannot support other coolers.</p>
+    </body>
+</html>

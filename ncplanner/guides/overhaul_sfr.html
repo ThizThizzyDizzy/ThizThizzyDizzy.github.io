@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Overhaul SFR</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Sarabun&display=swap" rel="stylesheet">
+        <style>
+            body{
+                background-color: #DDDDDD
+            }
+        </style>
+    </head>
+    <body>
+        <a class="button-link" href="./">
+            <div class="button">
+                Back
+            </div>
+        </a>
+        <h1>Overhaul SFR</h1>
+        <div class="floating">
+            <img src="img/overhaul_sfr.png" alt="Example Overhaul SFR">
+            <p>Example Overhaul SFR</p>
+        </div>
+        <h2>External Structure</h2>
+        <p>Overhaul SFRs are built with a cuboidal casing. The edges must be Reactor Casings, but the faces an also be made with Reactor Glass.</p>
+        <p>The fission controller can be placed within any face of the reactor casing.</p>
+        <p>Coolant can be piped in and out via Fission Reactor Vents.</p>
+        <p>Fuel can be piped in and out via Fission Fuel Cell Ports.</p>
+        <p>Items for Irradiator recipes can be piped in and out via Neutron Irradiator Ports.</p>
+        <p>Right click any port or vent with a multitool to switch it between Input and Output mode. In output mode, they will push their contents to adjacent pipes or inventories. (Do not extract items with a servo or something similar, as they can limit the output rate)</p>
+        <p>Neutron sources are placed within the casing. (They can be seen underneath the levers in the example).</p>
+        <p>To turn on a reactor, provide it with fuel, coolant, and provide a redstone signal to all neutron sources. In order to turn off the reactor, the design must include Neutron Shields. These can be toggled with a Fission Neutron Shield Manager. (See <a href="#neutron-shields">Neutron Shields</a> for more info)</p>
+        <h2>Coolant</h2>
+        <p>Coolant is inserted via a Fission Reactor Vent</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Input</th>
+                    <th>Output</th>
+                    <th>Heat</th>
+                    <th>Output Ratio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Water</td>
+                    <td>High Pressure Steam</td>
+                    <td>64</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>Preheated Water</td>
+                    <td>High Pressure Steam</td>
+                    <td>32</td>
+                    <td>4</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <p>Actual values may vary based on mod configuration.</p>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <h2>Fuels</h2>
+        <p>Fuel pellets are inserted via a Fission Fuel Cell Port. Each fuel has 4 stats:</p>
+        <ul>
+            <li><span class="variable">Efficiency</span>: The base efficiency of the fuel.</li>
+            <li><span class="variable">Base Heat</span>: The base heat generation of the fuel.</li>
+            <li><span class="variable">Criticality</span>: The amount of neutron flux required to activate a fuel cell.</li>
+            <li><span class="variable">Base Time</span>: The time, in ticks, that one fuel pellet will last in one fuel cell.</li>
+        </ul>
+        <p>Some fuels are also self-priming. This means they do not require a neutron source.
+        <h2>Internal Structure</h2>
+        <p>Every fission reactor contains Fuel Cells, Moderators, and Heat Sinks. They may also contain Reflectors, Irradiators, Neutron Shields, and Conductors.</p>
+        <table class="borderless">
+            <tr>
+                <td><img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell"></td>
+                <td><img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator"></td>
+                <td><img src="img/blocks/overhaul_sfr/beryllium-carbon.png" alt="Beryllium-Carbon Reflector"></td>
+                <td><img src="img/blocks/overhaul_sfr/irradiator.png" alt="Neutron Irradiator"></td>
+                <td><img src="img/blocks/overhaul_sfr/boron-silver.png" alt="Boron-Silver Neutron Shield"></td>
+                <td><img src="img/blocks/overhaul_sfr/water.png" alt="Water Heat Sink"></td>
+                <td><img src="img/blocks/overhaul_sfr/conductor.png" alt="Conductor"></td>
+            </tr>
+            <tr>
+                <td>Fuel Cell</td>
+                <td>Heavy Water Moderator</td>
+                <td>Beryllium-Carbon Reflector</td>
+                <td>Neutron Irradiator</td>
+                <td>Boron-Silver Neutron Shield</td>
+                <td>Water Heat Sink</td>
+                <td>Conductor</td>
+            </tr>
+        </table>
+        <h3>Fuel Cells</h3>
+        <p>Each fuel cell can have a different fuel. To filter a fuel cell or port, right click it with a fuel pellet. Filtered cells are accessed through filtered ports.</p>
+        <p>Fuel cells must be activated for the reactor start. They become active when they receive enough neutron flux. (when <span class="expression">flux >= fuel criticality</span>)</p>
+        <p>Neutron flux spreads through the reactor's core through moderator lines. It originates from cells that are primed with a netron source. To prime a cell, place a neutron source in the casing with line-of-sight to the cell you want to prime.</p>
+        <p>Line-of-sight is obstructed by cells, reflectors, and irradiators, but not by heat sinks, moderators, or conductors.</p>
+        <p>You can automatically place a neutron source in the planner by shift-clicking the cell you want to prime.</p>
+        <p>The cell in the first example does not have line-of-sight to the casing, but the cell in the second one does.</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/overhaul_sfr/casing.png" alt="Casing">
+                <img src="img/blocks/overhaul_sfr/beryllium-carbon.png" alt="Reflector">
+                <img src="img/blocks/overhaul_sfr/beryllium.png" alt="Moderator">
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+            <div>
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/overhaul_sfr/water.png" alt="Water Heat Sink">
+                <img src="img/blocks/overhaul_sfr/copper.png" alt="Copper Heat Sink">
+                <img src="img/blocks/overhaul_sfr/casing.png" alt="Casing">
+            </div>
+        </div>
+        <p>Once a cell is activated, it will transmit neutron flux through all connected moderator lines. Fuel cells will not stay active unless they have enough sustained neutron flux from other active cells.</p>
+        <p>Cells gain a heat multiplier and efficiency multiplier from all connected moderator lines. The heat multiplier is equal to the number of adjacent moderator lines.</p>
+        <p>The positional efficiency is the sum of each moderator line's efficiency (which is the average of each of its moderators' efficiencies).</p>
+        <p>The total efficiency multiplier is the positional efficiency multiplied by the fuel's efficiency.</p>
+        <h3>Moderators</h3>
+        <p>Moderators transmit neutron flux between Fuel Cells, Reflectors, and Irradiators.</p>
+        <p>Each moderator has a flux factor and an efficiency factor.</p>
+        <p>Moderator lines can be a maximum of 4 blocks long, or half of that when connected to a reflector.</p>
+        <p>Here is a list of moderator stats:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Moderator</th>
+                    <th>Flux Factor</th>
+                    <th>Efficiency Factor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                        Graphite Moderator
+                    </td>
+                    <td>10</td>
+                    <td>1.1</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/beryllium.png" alt="Beryllium Moderator">
+                        Beryllium Moderator
+                    </td>
+                    <td>22</td>
+                    <td>1.05</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                        Heavy Water Moderator
+                    </td>
+                    <td>36</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <p>Actual values may vary based on mod configuration</p>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>The total flux of a moderator line is the sum of each moderator's flux factor. The total efficiency is the average of each moderator's efficiency factor.</p>
+        <p>In this example, the moderator line has a flux factor of 92 (<span class='expression'>10+36+10+36</span>) and an efficiency of 105% (<span class="expression">(1.1+1.0+1.1+1.0)/4</span>)</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+        </div>
+        <p>The ends of moderator lines can also support heat sinks, but only if they end at a cell</p>
+        <p>For example, the beryllium moderators below can support coolers, but the graphite moderators cannot.</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/overhaul_sfr/beryllium.png" alt="Beryllium Moderator">
+                <img src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/overhaul_sfr/beryllium.png" alt="Beryllium Moderator">
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+            <div>
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/overhaul_sfr/beryllium.png" alt="Beryllium Moderator">
+                <img src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/overhaul_sfr/beryllium-carbon.png" alt="Beryllium-Carbon Reflector">
+            </div>
+        </div>
+        <h3>Reflectors</h3>
+        <p>Reflectors will reflect neutron flux back to cells through moderator lines. Each reflector has a Reflectivity and Efficiency factor.</p>
+        <p>Moderator lines to reflectors can only be 2 blocks long since the neutron flux travels to the reflector, then back (a total of 4 blocks)</p>
+        <p>The moderator line's neutron flux is multiplied by the reflector's reflectivity.</p>
+        <p>The moderator line's efficiency is also multiplied by the reflector's efficiency factor.</p>
+        <p>Here is a list of all reflector stats:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Reflector</th>
+                    <th>Reflectivity</th>
+                    <th>Efficiency Factor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/lead-steel.png" alt="Lead-Steel Reflector">
+                        Lead-Steel
+                    </td>
+                    <td>50%</td>
+                    <td>25%</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/beryllium-carbon.png" alt="Beryllium-Carbon Reflector">
+                        Beryllium-Carbon
+                    </td>
+                    <td>100%</td>
+                    <td>50%</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <p>Actual values may vary based on mod configuration</p>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>For example, the first moderator line provides 40 neutron flux (<span class="expression">(10+10)*2*1</span>) and has an efficiency factor of 55% (<span class="expression">(1.1+1.1)/2*0.5</span>)</p>
+        <p>The second moderator line provides 72 neutron flux (<span class="expression">(36+36)*2*0.5</span>) and has an efficiency of 25% (<span class="expression">(1+1)/2*0.25</span>)</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/overhaul_sfr/beryllium-carbon.png" alt="Beryllium-Carbon Reflector">
+                <img src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+            <div>
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/lead-steel.png" alt="Lead-Steel Reflector">
+            </div>
+        </div>
+        <h3>Irradiators</h3>
+        <p>Irradiators are placed in a reactor to perform recipes using neutron flux.</p>
+        <p>Irradiators are placed at the end of a moderator line. Each irradiator recipe requires a specific amount of neutrons, so more neutron flux will speed up the recipes. (One moderator is enough for a slow irradiator)</p>
+        <p>For example, this irradiator will receive 144 neutron flux from the fuel cell. The cell gains no neutron flux from this moderator line.</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/irradiator.png" alt="Irradiator">
+            </div>
+        </div>
+        <p>Each Irradiator recipe has an efficiency multiplier. The moderator line's efficiency is multiplied by the irradiator recipe's efficiency multiplier.</p>
+        <p>If the irradiator recipe also produces heat, the irradiator will generate heat for each point of neutron flux provided to the irradiator.</p>
+        <p>Here is a list of all irradiator recipes:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Input</th>
+                    <th>Output</th>
+                    <th>Efficiency</th>
+                    <th>Heat Per Flux</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Thorium</td>
+                    <td>Protactinium-Enriched Thorium</td>
+                    <td>0%</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Protactinium-Enriched Thorium</td>
+                    <td>Protactinium-233</td>
+                    <td>0%</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Bismuth Dust</td>
+                    <td>Polonium Dust</td>
+                    <td>50%</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <p>Actual values may vary based on mod configuration</p>
+                    </td>
+                </tr>
+        </table>
+        <h3 id='neutron-shields'>Neutron Shields</h3>
+        <p>Neutron shields can be used to toggle moderator lines and shut down reactors. They can be in placed in place of any moderator, although they do not provide any neutron flux.</p>
+        <p>Here is a list of all neutron shield stats:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Shield</th>
+                    <th>Efficiency</th>
+                    <th>Heat Per Flux</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img class='icon' src='img/blocks/overhaul_sfr/boron-silver.png' alt='Boron-Silver'>
+                        Boron-Silver
+                    </td>
+                    <td>50%</td>
+                    <td>5</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan='3'>
+                        <p>Actual values may vary based on mod configuration</p>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>Shields generate heat for each point of neutron flux passing through them. Only some of this heat will count towards heating coolant (<span class="expression">heat * shield efficiency</span>)</p>
+        <p>Shields can be closed with a Shield Controller, which will shut down its moderator line, blocking neutron flux between linked cells. If a cell's flux falls below its criticality, it will shut down as well.</p>
+        <p>For example, This shield will generate 100 heat, from 20 flux passing through it (10 on the way to the reflector, 10 on the way back)</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/overhaul_sfr/beryllium-carbon.png" alt="Beryllium-Carbon Reflector">
+                <img src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/overhaul_sfr/boron-silver.png" alt="Boron-Silver Neutron Shield">
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+        </div>
+        <p>This shield will generate 150 heat, from 30 flux passing through it (20 from the left, 10 from the right)</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/overhaul_sfr/boron-silver.png" alt="Boron-Silver Neutron Shield">
+                <img src="img/blocks/overhaul_sfr/graphite.png" alt="Graphite Moderator">
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+            </div>
+        </div>
+        <p>This shield will generate 180 heat, from 36 flux passing through it. The moderators to its right do not provide it flux, as it is absorbed by the irradiator.</p>
+        <div class="centered-row">
+            <div>
+                <img src="img/blocks/overhaul_sfr/cell.png" alt="Fuel Cell">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/boron-silver.png" alt="Boron-Silver Neutron Shield">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/heavy_water.png" alt="Heavy Water Moderator">
+                <img src="img/blocks/overhaul_sfr/irradiator.png" alt="Irradiator">
+            </div>
+        </div>
+        <h3>Heat Sinks</h3>
+        <p>Heat Sinks are placed in the reactor to cool it down. Each heat sink has placement rules and a cooling rate. If its rules are met, the heat sink becomes active, and can support other heat sinks.</p>
+        <p>Here is a list of all heat sinks and their stats:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Heat Sink</th>
+                    <th>Cooling Rate</th>
+                    <th>Requirements</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/water.png" alt="Water Heat Sink">
+                        Water Heat Sink
+                    </td>
+                    <td>55 H/t</td>
+                    <td>1 Fuel Cell</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/iron.png" alt="Iron Heat Sink">
+                        Iron Heat Sink
+                    </td>
+                    <td>50 H/t</td>
+                    <td>1 Moderator</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/redstone.png" alt="Redstone Heat Sink">
+                        Redstone Heat Sink
+                    </td>
+                    <td>85 H/t</td>
+                    <td>1 Fuel Cell and 1 Moderator</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/quartz.png" alt="Quartz Heat Sink">
+                        Quartz Heat Sink
+                    </td>
+                    <td>80 H/t</td>
+                    <td>1 Redstone Heat Sink</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/obsidian.png" alt="Obsidian Heat Sink">
+                        Obsidian Heat Sink
+                    </td>
+                    <td>70 H/t</td>
+                    <td>Axial Glowstone Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/nether_brick.png" alt="Nether Brick Heat Sink">
+                        Nether Brick Heat Sink
+                    </td>
+                    <td>105 H/t</td>
+                    <td>1 Obsidian Heat Sink</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/glowstone.png" alt="Glowstone Heat Sink">
+                        Glowstone Heat Sink
+                    </td>
+                    <td>90 H/t</td>
+                    <td>2 Moderators</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/lapis.png" alt="Lapis Heat Sink">
+                        Lapis Heat Sink
+                    </td>
+                    <td>100 H/t</td>
+                    <td>1 Fuel Cell and 1 Casing</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/gold.png" alt="Gold Heat Sink">
+                        Gold Heat Sink
+                    </td>
+                    <td>110 H/t</td>
+                    <td>Exactly 2 Iron Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/prismarine.png" alt="Prismarine Heat Sink">
+                        Prismarine Heat Sink
+                    </td>
+                    <td>115 H/t</td>
+                    <td>2 Water Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/slime.png" alt="Slime Heat Sink">
+                        Slime Heat Sink
+                    </td>
+                    <td>145 H/t</td>
+                    <td>Exactly 1 Water and 2 Lead Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/end_stone.png" alt="End Stone Heat Sink">
+                        End Stone Heat Sink
+                    </td>
+                    <td>65 H/t</td>
+                    <td>1 Reflector</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/purpur.png" alt="Purpur Heat Sink">
+                        Purpur Heat Sink
+                    </td>
+                    <td>95 H/t</td>
+                    <td>1 Reflector and 1 Iron Heat Sink</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/diamond.png" alt="Diamond Heat Sink">
+                        Diamond Heat Sink
+                    </td>
+                    <td>200 H/t</td>
+                    <td>1 Fuel Cell and 1 Gold Heat Sink</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/emerald.png" alt="Emerald Heat Sink">
+                        Emerald Heat Sink
+                    </td>
+                    <td>195 H/t</td>
+                    <td>1 Moderator and 1 Prismarine Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/copper.png" alt="Copper Heat Sink">
+                        Copper Heat Sink
+                    </td>
+                    <td>75 H/t</td>
+                    <td>1 Water Heat Sink</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/tin.png" alt="Tin Heat Sink">
+                        Tin Heat Sink
+                    </td>
+                    <td>120 H/t</td>
+                    <td>Axial Lapis Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/lead.png" alt="Lead Heat Sink">
+                        Lead Heat Sink
+                    </td>
+                    <td>60 H/t</td>
+                    <td>1 Iron Heat Sink</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/boron.png" alt="Boron Heat Sink">
+                        Boron Heat Sink
+                    </td>
+                    <td>160 H/t</td>
+                    <td>1 Quartz Heat Sink and 1 Casing</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/lithium.png" alt="Lithium Heat Sink">
+                        Lithium Heat Sink
+                    </td>
+                    <td>130 H/t</td>
+                    <td>Exact-Axial Lead Heat Sinks and 1 Casing</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/magnesium.png" alt="Magnesium Heat Sink">
+                        Magnesium Heat Sink
+                    </td>
+                    <td>125 H/t</td>
+                    <td>Exactly 1 Moderator and 1 Casing</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/manganese.png" alt="Manganese Heat Sink">
+                        Manganese Heat Sink
+                    </td>
+                    <td>150 H/t</td>
+                    <td>2 Fuel Cell</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/aluminum.png" alt="Aluminum Heat Sink">
+                        Aluminum Heat Sink
+                    </td>
+                    <td>175 H/t</td>
+                    <td>1 Quartz and 1 Lapis Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/silver.png" alt="Silver Heat Sink">
+                        Silver Heat Sink
+                    </td>
+                    <td>170 H/t</td>
+                    <td>2 Glowstone and 1 Tin Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/fluorite.png" alt="Fluorite Heat Sink">
+                        Fluorite Heat Sink
+                    </td>
+                    <td>165 H/t</td>
+                    <td>1 Gold and 1 Prismarine Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/villiaumite.png" alt="Villiaumite Heat Sink">
+                        Villiaumite Heat Sink
+                    </td>
+                    <td>180 H/t</td>
+                    <td>1 Redstone and 1 End Stone Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/carobbiite.png" alt="Carobbiite Heat Sink">
+                        Carobbiite Heat Sink
+                    </td>
+                    <td>140 H/t</td>
+                    <td>1 End Stone and 1 Copper Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/arsenic.png" alt="Arsenic Heat Sink">
+                        Arsenic Heat Sink
+                    </td>
+                    <td>135 H/t</td>
+                    <td>Axial Reflectors</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/nitrogen.png" alt="Liquid Nitrogen Heat Sink">
+                        Liquid Nitrogen Heat Sink
+                    </td>
+                    <td>185 H/t</td>
+                    <td>2 Copper and 1 Purpur Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/helium.png" alt="Liquid Helium Heat Sink">
+                        Liquid Helium Heat Sink
+                    </td>
+                    <td>190 H/t</td>
+                    <td>Exactly 2 Redstone Heat Sinks</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/enderium.png" alt="Enderium Heat Sink">
+                        Enderium Heat Sink
+                    </td>
+                    <td>155 H/t</td>
+                    <td>3 Moderators</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="icon" src="img/blocks/overhaul_sfr/cryotheum.png" alt="Cryotheum Heat Sink">
+                        Cryotheum Heat Sink
+                    </td>
+                    <td>205 H/t</td>
+                    <td>3 Fuel Cells</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <p>Actual values may vary based on mod configuration</p>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>There are a few types of placement rules:</p>
+        <ul>
+            <li><span class="expression">2 Fuel Cells</span> requires 2 or more fuel cells directly adjacent to this heat sink</li>
+            <li><span class="expression">Exactly 2 Redstone Heat Sinks</span> requires exactly 2 redstone heat sinksdirectly adjacent to this heat sink</li>
+            <li><span class="expression">Axial Lapis Heat Sinks</span> requires 2 lapis heat sinks on opposite sides of this heat sink. There can be more than 2 lapis heat sinks, but at least 2 must be on opposite sides</li>
+            <li><span class="expression">Exact-Axial Lead Heat Sinks</span> requires exactly 2 lead heat sinks, which must be on opposite sides of this heat sink.</li>
+        </ul>
+        <p>Note that you cannot have casing blocks inside the reactor. Heat Sinks that require casings must be on the outer edges of the reactor.</p>
+        <h3>Clusters</h3>
+        <p>Clusters are groups of cells, irradiators, shields, and heat sinks that are connected together. Every cluster must be connected to the casing. Clusters can be connected to each other and to the casing with Conductors.</p>
+        <p>If a cluster has a net heat of <span class="expression">> 10</span>, all its fuel cells will run through fuel faster than normal. (The cluster will also melt down once its heat buffer fills up)</p>
+        <p>If a cluster has a net heat of <span class="expression">&lt; -10</span>, it will get an extra penalty to efficiency</p>
+        <p>(The actual thresholds may vary based on mod configuration)</p>
+        <h3>Sparsity Penalty</h3>
+        <p>If the reactor has less than <span class="expression">75%</span> functional blocks, it will get an extra penalty to efficiency. Functional blocks include all valid cells, moderators, reflectors, irradiators, shields, and heat sinks, but not conductors.</p>
+        <p>(The actual threshold may vary based on mod configuration)</p>
+    </body>
+</html>

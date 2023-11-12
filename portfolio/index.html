@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Portfolio</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1 id="head">ThizThizzyDizzy'z Portfolio</h1>
+        <a class="button-link" href="..">
+            <div class="button">
+                Back
+            </div>
+        </a>
+        <nav>
+            <ul>
+                <li onmouseover="hover(0)" onmouseout="hover(-1)" onclick="clickNav()"><a href=javascript:void(0);>Hardware</a></li>
+                <li onmouseover="hover(1)" onmouseout="hover(-1)" onclick="clickNav()"><a href=javascript:void(0);>Systems</a></li>
+                <li onmouseover="hover(2)" onmouseout="hover(-1)" onclick="clickNav()"><a href=javascript:void(0);>Applications</a></li>
+            </ul>
+        </nav>
+        <div id="overlay"></div>                
+        <div id="section-0" class="section">
+            <div style="background-color: blanchedalmond;">
+                <h2>Hardware</h2>
+                <p>This section will include my hardware projects; involving sensors, microcontrollers, and low-level interfaces. This is especially relevant due to the nature of many of my projects, revolving around unique interactions and specialized VR hardware.</p>
+                <h3>Suit of armor</h3> <!-- This is important since it's the foundation for all my wearable projects -->
+                
+                <h3>Remote Control Tank</h3> <!-- Foundation for arduino/electronics projects -->
+                
+                <h3>EyeTrackVR Eye Trackers?</h3> <!-- Maybe not, as I didn't add much? But it's sorta neccesary for the Bad Eye Tracking mention later... -->
+                
+                <h3>Tundra tracker magnetic baseplate</h3> <!-- Foundation for 3dp/sewing projects (aka gloves) -->
+                
+                <h3>Customized LucidVR Gloves</h3> <!-- Core VR project -->
+            </div>
+        </div>
+        <div id="section-1" class="section">
+            <div style="background-color: aquamarine">
+                <h2>Systems</h2>
+                <p>This section will include the systems and algorithms that work behind the scenes to support many of my projects. This is an essential section since many of my projects are built with my own engines.</p>
+                <h3>Tank remote control?</h3> <!-- no important systems here, that's basically all hardware. (Maybe the finger tracking-controlled gestures?) -->
+                
+                <h3>Bad Eye Tracking</h3> <!-- Basis for computer vision projects -->
+                
+                <h3>Plannerator Engine???</h3> <!-- Basis for 3D projects -->
+                <h4>Plannerator Configuration / NCPF</h4> <!-- just a fancy data structure, modularity, and organization thing -->
+                <h4>Plannerator Customizable Generator</h4> <!-- Basis for machine learning projects -->
+                
+                <h3>TreeFeller algorithm</h3> <!-- A very simple, but very effective algorithm. nobody else seems to be able to do it >.> -->
+            </div>
+        </div>
+        <div id="section-2" class="section">
+            <div style="background-color: lavender">
+                <h2>Applications</h2>
+                <p>This will be the final section, containing the programs built on the systems and interfacing with the previously mentioned hardware.</p>
+                <h3>Plannerator</h3> <!-- Main megaproject -->
+                <h4>Editor</h4> <!-- Algorithm-Human interactivity, include suggestors (generator algorithm) -->
+                <h4>S'tack/DSSL Editor</h4> <!-- Programmability or something? technical side of things I guess -->
+                <h4>VR Editor</h4> <!-- Main VR Application -->
+                
+                <h3>OVRToolkit mods & apps</h3> <!-- VR Tools - Watchdog, window anchors, thizkit, everything really -->
+                
+                <h3>TreeFeller</h3> <!-- Wide use, algorithms, simplegui -->
+            </div>
+        </div>
+        <script>
+            var overlay = document.querySelector("#overlay");
+            var nav = document.querySelector("nav");
+            var overlayOpacity = 0;
+            var lastIdx = -1;
+            var overlayOpacitizing = false;//this is always what I call my variables that tell which direction the opacity is changing.
+            var movingTo = -1;
+            var justMoved = -1;
+            const fade = setInterval(()=>{
+                if(overlayOpacitizing||movingTo>=0)overlayOpacity+=0.05;
+                else overlayOpacity-=0.08;
+                if(overlayOpacity<0){
+                    overlay.innerHTML = "";
+                    overlayOpacity = 0;
+                }
+                let limit = movingTo<0?0.8:1;
+                if(overlayOpacity>limit)overlayOpacity = limit;
+                overlay.style.opacity = overlayOpacity;
+                overlay.style.filter = "blur("+(3-overlayOpacity*3)+"px)";
+                overlay.style.height = overlayOpacity*100+"%";
+                if(movingTo>=0&&overlayOpacity===1){
+                    window.scrollTo(0, document.querySelector("#section-"+movingTo).getBoundingClientRect().top+window.scrollY-nav.offsetHeight);
+                    justMoved = movingTo;
+                    movingTo = -1;
+                    overlayOpacity = 0;
+                    overlayOpacitizing = false;
+                }
+            }, 20);
+            window.onscroll = function (e) {
+                let title = document.querySelector("#head");
+                if(window.scrollY>title.offsetHeight){ // check if you've scrolled past the title
+                    nav.style.position = "fixed";
+                    nav.style.top = "0%";
+                    overlay.style.position = "fixed";
+                    overlay.style.top = nav.offsetHeight+"px";
+                }else{
+                    nav.style.position = "absolute";
+                    nav.style.top = title.offsetHeight+"px";
+                    overlay.style.position = "absolute";
+                    overlay.style.top = nav.offsetHeight+title.offsetHeight+"px";
+                }
+            };
+            window.onscroll(); // set the base height
+            function hover(idx){
+                let overlay = document.querySelector("#overlay");
+                if(idx<0){
+                    overlayOpacitizing = false;
+                    justMoved = -1;
+                }else{
+                    if(idx===justMoved){
+                        return;
+                    }
+                    if(lastIdx!==idx)overlayOpacity = 0;
+                    lastIdx = idx;
+                    overlayOpacitizing = true;
+                    overlay.innerHTML = document.querySelector("#section-"+idx).innerHTML;
+                }
+            }
+            function clickNav(){
+                if(justMoved===lastIdx)return;
+                movingTo = lastIdx;
+            }
+        </script>
+    </body>
+</html>
