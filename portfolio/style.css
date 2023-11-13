@@ -18,6 +18,11 @@ h2{
     background-color: #99ccff;
     margin: 1em 2em;
 }
+h3{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1em 2em;
+}
 nav{
     left: 0%;
     width: 100%;
@@ -32,7 +37,7 @@ nav ul{
     background-color: #6699ff;
 }
 nav ul li{
-    font-size: 1.6em;
+    font-size: 1.6rem;
     font-weight: bold;
     display: block;
     margin: 1em 0.5em;
@@ -46,11 +51,34 @@ nav ul li a{
     text-decoration: none;
     color: black;
 }
-.section{
+.chapter{
     padding: 1em 0em;
 }
-.section div, #overlay div{
+.chapter div, #overlay div{
     padding: 1em 1em
+}
+.desc{
+    margin: 1em 1em;
+    padding: 0em;
+    background-color: aliceblue;
+    border: 0.2rem solid;
+    border-radius: 0.6rem;
+}
+.desc{
+    text-align: left;
+}
+.tags{
+    margin: 1em;
+    padding: 0em;
+    background-color: aquamarine;
+    border: 0.2rem solid;
+    border-radius: 0.5rem;
+    display: grid;
+    grid-auto-flow: column;
+}
+.tag{
+    font-size: 1.3em;
+    font-weight: bold;
 }
 #overlay{
     padding: 1em 0em;
@@ -61,5 +89,8 @@ nav ul li a{
     opacity: 0%;
 }
 p{
-    font-size: 1.5em;
+    font-size: 1.2rem;
+}
+.desc ul li, .desc ol li{
+    font-size: 1.4rem;
 }
