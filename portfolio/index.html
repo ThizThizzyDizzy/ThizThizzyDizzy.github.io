@@ -5,9 +5,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Sarabun&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1 id="head">ThizThizzyDizzy'z Portfolio</h1>
+        <h1 id="head">ThizThizzyDizzy</h1>
 <!--        <a class="button-link" href="..">
             <div class="button">
                 Back
@@ -21,7 +24,7 @@
             </ul>
         </nav>
         <div>
-            <p>Hi, I am me, and I do stufff :3 (intro & brief bio)</p>
+            <p>Welcome! My name is Thiz. I am a Developer, Tinkerer, and VR Enthusiast with a wide range of experience across many technological fields.</p>
         </div>
         <div id="overlay"></div>                
         <div id="chapter-0" class="chapter">
@@ -58,12 +61,13 @@
                         </div>
                     </div>
                     <div class="desc">
-                        <p>A robotic tank built from of a combination of K'nex, arduino-based electronics, and custom mechanical components.</p>
+                        <p>A robotic tank built from of a combination of K'nex, arduino-based electronics, and some custom mechanical parts.</p>
+                        <p>Plastic rods proved to be too weak to rotate the turret, so it instead rotates on a keyed aluminum shaft, integerated into the rest of the tank via custom 3D printed parts.</p>
                         <p>This tank was built with four 12V motors; One for each tread, one for rotating the turret, and one for firing the cannon. The Main chassis was built using two batteries in parallel in order to better run both treads at the same time. The turret only uses one, since rotating the turret requires less power to operate.</p>
                         <p>Due to the limitations of K'nex, there is no electrical connection between the body of the tank and the turret. Each section instead has a separate battery, controller, and wireless connection to the remote control.</p>
                     </div>
                 </div>
-                <div class="section">
+                <div class="section" id="etvr">
                     <div class="section-header">
                         <h3>VR Eye Trackers</h3> <!-- Maybe not, as I didn't add much? But it's sorta neccesary for the Bad Eye Tracking mention later... -->
                         <img src="img/hardware/etvr_raw.jpg" alt="An assembled set of EyeTrackVR Eye trackers and associated wiring layed out on a desk">
@@ -71,14 +75,13 @@
                         <div class="tags">
                             <span class="tag">3D Printing</span>
                             <span class="tag">Electronics</span>
-                            <span class="tag">Soldering</span>
                             <span class="tag">Wearable</span>
                             <span class="tag">Virtual Reality</span>
                         </div>
                     </div>
                     <div class="desc">
-                        <p>A set of custom <a href="https://docs.eyetrackvr.dev/">EyeTrackVR</a> Eye Trackers on a <a href="https://store.steampowered.com/valveindex">Valve Index</a>.</p>
-                        <p>This was the second set of eye trackers I built. The primary focus for this project was streamlining the wiring and ribbon cables to maintain a lower profile and reduce stress on the ribbon cables. I designed mounts for the microcontrollers that clip onto the side of the headset, holding the boards in range of the cameras without blocking tracking.</p>
+                        <p>A set of custom <a href="https://docs.eyetrackvr.dev/">EyeTrackVR</a> Eye Trackers on a <a href="https://www.valvesoftware.com/en/index">Valve Index</a>.</p>
+                        <p>This is the second set of eye trackers I have built based on the EyeTrackVR project. The primary focus for this project was streamlining the wiring and ribbon cables to maintain a lower profile and reduce stress on the ribbon cables. I designed clips for the microcontrollers that attach them to the side of the headset, holding the boards in range of the cameras without interrupting the headset tracking.</p>
                     </div>
                 </div>
                 <div class="section">
@@ -92,24 +95,31 @@
                         </div>
                     </div>
                     <div class="desc">
-                        <p></p>
+                        <p>These are two-piece magnetic baseplates for <a href="https://tundra-labs.com/">Tundra Trackers</a>. This is designed to be sewn directly onto clothing, holding the trackers on via magnets. This has the following benefits:</p>
+                        <ul>
+                            <li>These are much faster and easier to use than straps</li>
+                            <li>The trackers are held in the exact same spot throughout and between sessions, and never needs to be recalibrated</li>
+                            <li>This baseplate is much thinner and lighter than the standard threaded baseplate</li>
+                        </ul>
+                        <p>The magnetic release was designed to allow the clothing to still be easily washed. Printing them with a higher-temperature plastic also allows them to last a long time.</p>
                     </div>
                 </div>
                 <div class="section">
                     <div class="section-header">
-                        <h3>Customized LucidVR Gloves</h3> <!-- Core VR project -->
+                        <h3>Customized LucidVR Actuators</h3> <!-- Core VR project -->
                         <img src="img/hardware/lucidvr_actuator.jpg" alt="A modified LucidVR Glove actuator assembly">
                         <div class="tags">
                             <span class="tag">3D Printing</span>
                             <span class="tag">Mechanical</span>
                             <span class="tag">Electronics</span>
-                            <span class="tag">Soldering</span>
                             <span class="tag">Wearable</span>
                             <span class="tag">Virtual Reality</span>
                         </div>
                     </div>
                     <div class="desc">
-                        <p></p>
+                        <p>This is a modified version of the Actuators from <a href="https://github.com/LucidVR/lucidgloves/tree/proto5/hardware/Prototype5_BETA">LucidVR Prototype 5 Gloves</a>.</p>
+                        <p>I split the main sensor housing into more pieces to avoid requiring supports to be built onto the part, significantly improving the quality and reducing the amount of post-processing required.</p>
+                        <p>The sensor top was also converted from a friction-fit to using a screw instead (the golden-colored screw on the right) which allows for greater print tolerances and easier assembly.</p>
                     </div>
                 </div>
             </div>
@@ -127,45 +137,195 @@
                         </div>
                     </div>
                     <div class="desc">
-                        <p></p>
+                        <p>This is an alternative solution for eye tracking, designed for use with <a href="https://docs.eyetrackvr.dev/">EyeTrackVR</a> Eye Trackers. This was made to solve some issues I had with my <a href=#etvr>Eye Trackers</a>, from which it gets its name:</p>
+                        <ul>
+                            <li>Unstable connection - cameras have varying framerates and constantly lose connection</li>
+                            <li>Interference - camera feeds interfere with one another, sometimes briefly exchanging frames</li>
+                            <li>Poor Lighting - Eyes were not evenly lit, which the (early in development at the time) EyeTrackVR software was unable to track</li>
+                        </ul>
+                        <p>Despite all of those issues, and the constant flickering visible in the above image, this is able to produce a fairly accurate and fairly stable tracking result, including eye look direction and eye openness.</p>
+                        <p>Many safeguards were put in to prevent the program from failing, from automatically reconnecting if one of the camera streams froze to restarting the entire program occasionally to prevent more subtle issues from developing.
                     </div>
                 </div>
                 <div class="section">
                     <div class="section-header">
                         <h3>Plannerator Configuration / NCPF</h3> <!-- just a fancy data structure, modularity, and organization thing -->
-                        <img src="#TODO" alt="Image/text/code block depicting NCPF structure and modularity, perhaps showing plannerator configuration menu">
+                        <div class="code">
+{
+    "metadata": 1,
+    "name": "nuclearcraft:cooler",
+    "type": "legacy_block",
+    "modules": {
+        "nuclearcraft:underhaul_sfr:cooler": {
+            "cooling": 60,
+            "rules": [
+                {
+                    "rules": [
+                        {
+                            "min": 1,
+                            "max": 6,
+                            "block": {
+                                "name": "nuclearcraft:underhaul_sfr:fuel_cell",
+                                "type": "module"
+                            },
+                            "type": "between"
+                        },
+                        {
+                            "min": 1,
+                            "max": 6,
+                            "block": {
+                                "name": "nuclearcraft:underhaul_sfr:moderator",
+                                "type": "module"
+                            },
+                            "type": "between"
+                        }
+                    ],
+                    "type": "or"
+                }
+            ]
+        },
+        "plannerator:display_name": {
+            "display_name": "Water Cooler"
+        },
+        "plannerator:texture": {
+            "texture": "[...]"
+        },
+        "plannerator:legacy_names": {
+            "legacy_names": [
+                "Water Cooler"
+            ]
+        }
+    }
+}
+                        </div>
                         <div class="tags">
                             <span class="tag">Data Structure</span>
                             <span class="tag">Modularity</span>
                         </div>
                     </div>
                     <div class="desc">
-                        <p></p>
+                        <p>This is a piece of NCPF (an NCPF Element) with the texture data removed for brevity.</p>
+                        <p>NCPF is an extremely modular custom data format designed for my NuclearCraft Plannerator. While its primary purpose is to store the plannerator configuration and saved designs, but can contain any additional data in custom modules. Every element in NCPF can also be overwritten, modified, or added by addons.</p>
+                        <p>While I primarily use JSON, NCPF can be stored in any format that supports the required structure.</p>
                     </div>
                 </div>
                 <div class="section">
                     <div class="section-header">
                         <h3>Plannerator Customizable Generator</h3> <!-- Basis for machine learning projects -->
                         <img src="img/systems/generator.gif" alt="An animation depicting generation of a NuclearCraft reactor through multiple stages">
+                        <img src="img/systems/generator_settings.png" alt="The generator configuration">
                         <div class="tags">
                             <span class="tag">Machine Learning</span>
                             <span class="tag">Modularity</span>
                         </div>
                     </div>
                     <div class="desc">
-                        <p></p>
+                        <p>This is the design generator from my NuclearCraft Plannerator. The animation above depicts the generation of an Underhaul SFR, using the settings listed above.</p>
+                        <p>This generator runs in multiple stages; building the reactor core first, before cooling it down and refining it to the desired levels. In order to avoid getting stuck in local minima, it generates a few rough solutions very quickly, then picks the best one of those to further refine.</p>
+                        <p>While the generator was originally designed for generating NuclearCraft reactors, it is fully capable of quickly generating solutions for generalized puzzles.</p>
                     </div>
                 </div>
                 <div class="section">
                     <div class="section-header">
                         <h3>TreeFeller algorithm</h3> <!-- A very simple, but very effective algorithm. nobody else seems to be able to do it >.> -->
-                        <img src="#TODO" alt="code block of simplified treefeller algorithm">
+                        <div class="code">
+private static HashMap&lt;Integer, ArrayList&lt;Block&gt;&gt; getBlocks(Collection&lt;Material&gt; materialTypes, Block startingBlock, int maxDistance, int maxBlocks, boolean diagonal, boolean playerLeaves, boolean ignoreLeafData, boolean invertLeafDirection){
+    //layer zero
+    HashMap&lt;Integer, ArrayList&lt;Block&gt;&gt; results = new HashMap&lt;&gt;();
+    int total = 0;
+    ArrayList&lt;Block&gt; zero = new ArrayList&lt;&gt;();
+    if(materialTypes.contains(startingBlock.getType())){
+        zero.add(startingBlock);
+    }
+    results.put(0, zero);
+    total+=zero.size();
+    //all the other layers
+    for(int i = 0; i&lt;maxDistance; i++){
+        ArrayList&lt;Block&gt; layer = new ArrayList&lt;&gt;();
+        ArrayList&lt;Block&gt; lastLayer = new ArrayList&lt;&gt;(results.get(i));
+        if(i==0&&lastLayer.isEmpty()){
+            lastLayer.add(startingBlock);
+        }
+        for(Block block : lastLayer){
+            if(diagonal){
+                for(int x = -1; x&lt;=1; x++){
+                    for(int y = -1; y&lt;=1; y++){
+                        for(int z = -1; z&lt;=1; z++){
+                            if(x==0&&y==0&&z==0)continue;//same block
+                            Block newBlock = block.getRelative(x,y,z);
+                            if(!materialTypes.contains(newBlock.getType())){
+                                continue;
+                            }
+                            if(lastLayer.contains(newBlock))continue;//if the new block is on the same layer, ignore
+                            if(i&gt;0&&results.get(i-1).contains(newBlock))continue;//if the new block is on the previous layer, ignore
+                            if(layer.contains(newBlock))continue;//if the new block is on the next layer, but already processed, ignore
+                            if(newBlock.getBlockData() instanceof Leaves){
+                                Leaves newLeaf = (Leaves)newBlock.getBlockData();
+                                if(!playerLeaves&&newLeaf.isPersistent())continue;
+                                if(!ignoreLeafData){
+                                    if(block.getBlockData() instanceof Leaves){
+                                        Leaves oldLeaf = (Leaves)block.getBlockData();
+                                        if(invertLeafDirection){
+                                            if(newLeaf.getDistance()&gt;=oldLeaf.getDistance())continue;
+                                        }else{
+                                            if(newLeaf.getDistance()&lt;=oldLeaf.getDistance())continue;
+                                        }
+                                    }
+                                }
+                            }
+                            layer.add(newBlock);
+                        }
+                    }
+                }
+            }else{
+                for(int j = 0; j&lt;6; j++){
+                    int x = directions[j].x, y = directions[j].y, z = directions[j].z;
+                    Block newBlock = block.getRelative(x,y,z);
+                    if(!materialTypes.contains(newBlock.getType())){
+                        continue;
+                    }
+                    if(lastLayer.contains(newBlock))continue;//if the new block is on the same layer, ignore
+                    if(i&gt;0&&results.get(i-1).contains(newBlock))continue;//if the new block is on the previous layer, ignore
+                    if(layer.contains(newBlock))continue;//if the new block is on the next layer, but already processed, ignore
+                    if(newBlock.getState().getBlockData() instanceof Leaves){
+                        Leaves newLeaf = (Leaves)newBlock.getBlockData();
+                        if(!playerLeaves&&newLeaf.isPersistent())continue;
+                        if(!ignoreLeafData){
+                            if(block.getBlockData() instanceof Leaves){
+                                Leaves oldLeaf = (Leaves)block.getBlockData();
+                                if(invertLeafDirection){
+                                    if(newLeaf.getDistance()&gt;=oldLeaf.getDistance())continue;
+                                }else{
+                                    if(newLeaf.getDistance()&lt;=oldLeaf.getDistance())continue;
+                                }
+                            }
+                        }
+                    }
+                    layer.add(newBlock);
+                }
+            }
+        }
+        if(layer.isEmpty())break;
+        results.put(i+1, layer);
+        total+=layer.size();
+        if(total&gt;maxBlocks)return results;
+    }
+    return results;
+}
+                        </div>
                         <div class="tags">
                             <span class="tag">Algorithms</span>
                         </div>
                     </div>
                     <div class="desc">
-                        <p></p>
+                        <p>This is the core algorithm for my Tree Feller, a minecraft plugin that detects and destroys an entire tree when a block is broken.</p>
+                        <p>This is a very common problem to solve, and many other plugins have been created for the same purpose, but they always make critical mistakes regarding how a tree is detected. Some common problems include:</p>
+                        <ul>
+                            <li>Failing to differentiate between one tree and the next, cutting down adjacent tree leaves or entire forests</li>
+                            <li>Failing to detect tree branches extending diagonally out from a tree</li>
+                            <li>Improperly detecting other structures as trees</li>
+                        </ul>
+                        <p>This algorithm was created to solve all of these and more, and is flexible enough that it's useful for many other projects, whenever detecting a contiguous area of connected cells is required.</p>
                     </div>
                 </div>
             </div>
@@ -177,27 +337,36 @@
                 <div class="section">
                     <div class="section-header">
                         <h3>Editor</h3> <!-- Algorithm-Human interactivity, include suggestors (generator algorithm) -->
-                        <img src="#TODO" alt="plannerator editor & suggestors">
+                        <img src="img/applications/editor.png" alt="The NuclearCraft Plannerator editor window">
                         <div class="tags">
                             <span class="tag">User Interface</span>
                             <span class="tag">Algorithms</span>
                         </div>
                     </div>
                     <div class="desc">
-                        <p></p>
+                        <p>This is the main editor of my NuclearCraft Plannerator, containing many helpful tools to assist design:</p>
+                        <ul>
+                            <li>Editor tools to draw lines or fill blocks across multiple layers at once.</li>
+                            <li>Many Symmetry options, to replicate your actions with perfect symmetry</li>
+                            <li>Overlays to highlight invalid elements or give more details about the calculations within the design.</li>
+                            <li>A 3D preview to show the complete structure of the design</li>
+                            <li>Suggestors, which automatically suggest improvements to the design based on certain criteria</li>
+                        </ul>
+                        <p>The editor also adapts to the configuration, allowing for full configuration via NCPF, and for extra elements to be defined as neccesary.</p>
                     </div>
                 </div>
                 <div class="section">
                     <div class="section-header">
-                        <h3>S'tack/DSSL Editor</h3> <!-- Programmability or something? technical side of things I guess -->
-                        <img src="#TODO" alt="S'tack Editor, debugger, and syntax highlighting">
+                        <h3>DSSL Editor</h3> <!-- Programmability or something? technical side of things I guess -->
+                        <img src="img/applications/stack.png" alt="A custom code ditor for S'tack">
                         <div class="tags">
                             <span class="tag">User Interface</span>
                             <span class="tag">Programming Languages</span>
                         </div>
                     </div>
                     <div class="desc">
-                        <p></p>
+                        <p>This is a custom code editor designed for <a href="https://github.com/tomdodd4598/Dodd-Simple-Stack-Language">Dodd Simple S'tack Language</a>.</p>
+                        <p>This editor provides syntax highlighting, formatting, a debugger with breakpoints, and other useful editing tools. The editor runs on a custom implementation of DSSL to allow debugging, and can also download and test with the standard DSSL interpreter for performance testing.</p>
                     </div>
                 </div>
                 <div class="section">
@@ -211,20 +380,29 @@
                         </div>
                     </div>
                     <div class="desc">
-                        <p></p>
+                        <p>This is the VR editor in the NuclearCraft Plannerator. This allows for editing designs directly in 3D, and offers many of the same advanced editing tools that are offered by the standard editor.</p>
+                        <p>The editor is abstracted such that both editors work as if they were the same one. All of the editor tools support 2D and 3D editing. All of the modifiers support keyboard and controller-based bindings. All of the overlays and decals are drawn in 2D and 3D</p>
                     </div>
                 </div>
                 <div class="section">
                     <div class="section-header">
                         <h3>OVRToolkit apps</h3> <!-- VR Tools - Watchdog, window anchors, thizkit, everything really -->
-                        <img src="#TODO" alt="images depicting every OVRToolkit app I have made">
+                        <img src="img/applications/ovrt-apps.png" alt="A handful of VR overlays, labeled by virtual sticky notes">
                         <div class="tags">
                             <span class="tag">User Interface</span>
                             <span class="tag">Virtual Reality</span>
                         </div>
                     </div>
                     <div class="desc">
-                        <p></p>
+                        <p>As I work in VR a lot, I have made a handful of custom apps for OVRToolkit, many to help improve my productivity when in VR. The following apps are listed above:</p>
+                        <ul>
+                            <li>Markers - Customizable decorative markers; This can also automatically highlight the center of your play area.</li>
+                            <li>OSC Macros - A customizable OSC macro pad for integration with other apps, such as VRChat</li>
+                            <li>Window Anchor - A powerful tool for linking, organizing, and controlling other overlays</li>
+                            <li>OVRT Watchdog - A debug console for OVRToolkit, displaying log output and errors directly in VR</li>
+                            <li>API Testing - A tool made to test every API call in OVRToolkit to verify and test functionality</li>
+                            <li>Sticky Notes - A handy tool to write persistent notes across any application</li>
+                        </ul>
                     </div>
                 </div>
             </div>

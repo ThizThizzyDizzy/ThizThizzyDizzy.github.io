@@ -1,7 +1,7 @@
 body{
     margin: 0px;
     text-align: center;
-    font-family: sans-serif;
+    font-family: 'Sarabun', sans-serif;
 }
 h1{
     font-size: 2em;
@@ -55,20 +55,17 @@ nav ul li a{
     padding: 1em 0em;
 }
 .chapter div, #overlay div{
-    padding: 1em 1em
+    padding: 1em 1em;
 }
 .desc{
     margin: 1em 1em;
     padding: 0em;
-    background-color: aliceblue;
-    border: 0.2rem solid;
-    border-radius: 0.6rem;
 }
 .desc{
     text-align: left;
 }
 .tags{
-    margin: 1em;
+    margin: 0em;
     padding: 0em;
     background-color: aquamarine;
     border: 0.2rem solid;
@@ -88,9 +85,40 @@ nav ul li a{
     height: 100%;
     opacity: 0%;
 }
-p{
+p, .desc ul li, .desc ol li{
     font-size: 1.2rem;
+    list-style-position: inside;
 }
-.desc ul li, .desc ol li{
-    font-size: 1.4rem;
+.code{
+    white-space: pre-wrap;
+    text-align: left;
+    font-size: 0.8rem;
+    font-family: monospace;
+    line-height: 1em;
+}
+img, .code{
+    display: block;
+    max-width: 50vw;
+    margin: 0em;
+    padding: 0em;
+    background-color: aliceblue;
+    border: 0.2rem solid;
+    border-radius: 0.6rem;
+}
+.section-header{
+    display: block;
+    float: left;
+    line-height: 0px;
+    margin-right: 1em;
+    padding: 0em;
+    background-color: azure;
+    border: 0.2rem solid;
+    border-radius: 0.6rem;
+}
+.section {
+    padding: 0em 0em;
+    overflow: auto;
+    background-color: aliceblue;
+    border: 0.2rem solid;
+    border-radius: 0.6rem;
 }
