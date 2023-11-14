@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Portfolio</title>
+        <title>Portfolio - ThizThizzyDizzy</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Sarabun&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1 id="head">ThizThizzyDizzy</h1>
+        <h1 id="head">Portfolio</h1>
 <!--        <a class="button-link" href="..">
             <div class="button">
                 Back
@@ -28,7 +28,7 @@
         </div>
         <div id="overlay"></div>                
         <div id="chapter-0" class="chapter">
-            <div style="background-color: blanchedalmond;">
+            <div class="chapter-background">
                 <h2>Hardware</h2>
                 <div class="section">
                     <div class="section-header">
@@ -106,7 +106,7 @@
                 </div>
                 <div class="section">
                     <div class="section-header">
-                        <h3>Customized LucidVR Actuators</h3> <!-- Core VR project -->
+                        <h3>Customized LucidVR Glove Actuators</h3> <!-- Core VR project -->
                         <img src="img/hardware/lucidvr_actuator.jpg" alt="A modified LucidVR Glove actuator assembly">
                         <div class="tags">
                             <span class="tag">3D Printing</span>
@@ -125,7 +125,7 @@
             </div>
         </div>
         <div id="chapter-1" class="chapter">
-            <div style="background-color: aquamarine">
+            <div class="chapter-background">
                 <h2>Systems</h2>
                 <div class="section">
                     <div class="section-header">
@@ -149,7 +149,7 @@
                 </div>
                 <div class="section">
                     <div class="section-header">
-                        <h3>Plannerator Configuration / NCPF</h3> <!-- just a fancy data structure, modularity, and organization thing -->
+                        <h3>NCPF</h3> <!-- just a fancy data structure, modularity, and organization thing -->
                         <div class="code">
 {
     "metadata": 1,
@@ -204,8 +204,8 @@
                         </div>
                     </div>
                     <div class="desc">
-                        <p>This is a piece of NCPF (an NCPF Element) with the texture data removed for brevity.</p>
-                        <p>NCPF is an extremely modular custom data format designed for my NuclearCraft Plannerator. While its primary purpose is to store the plannerator configuration and saved designs, but can contain any additional data in custom modules. Every element in NCPF can also be overwritten, modified, or added by addons.</p>
+                        <p>This is an NCPF Element with the texture data removed for brevity.</p>
+                        <p>NCPF is a modular custom data format designed for my NuclearCraft Plannerator. While its primary purpose is to store the plannerator configuration and saved designs, but can contain any additional data in custom modules. Every element in NCPF can also be overwritten, modified, or added by addons.</p>
                         <p>While I primarily use JSON, NCPF can be stored in any format that supports the required structure.</p>
                     </div>
                 </div>
@@ -213,14 +213,16 @@
                     <div class="section-header">
                         <h3>Plannerator Customizable Generator</h3> <!-- Basis for machine learning projects -->
                         <img src="img/systems/generator.gif" alt="An animation depicting generation of a NuclearCraft reactor through multiple stages">
-                        <img src="img/systems/generator_settings.png" alt="The generator configuration">
+                        <div class="img-container" id="generator-settings">
+                            <img class="contained-img" src="img/systems/generator_settings.png" alt="The generator configuration">
+                        </div>
                         <div class="tags">
                             <span class="tag">Machine Learning</span>
                             <span class="tag">Modularity</span>
                         </div>
                     </div>
                     <div class="desc">
-                        <p>This is the design generator from my NuclearCraft Plannerator. The animation above depicts the generation of an Underhaul SFR, using the settings listed above.</p>
+                        <p>This is the design generator from my NuclearCraft Plannerator. The animation above depicts the generation of an Underhaul SFR, running with the pictured settings.</p>
                         <p>This generator runs in multiple stages; building the reactor core first, before cooling it down and refining it to the desired levels. In order to avoid getting stuck in local minima, it generates a few rough solutions very quickly, then picks the best one of those to further refine.</p>
                         <p>While the generator was originally designed for generating NuclearCraft reactors, it is fully capable of quickly generating solutions for generalized puzzles.</p>
                     </div>
@@ -331,12 +333,11 @@ private static HashMap&lt;Integer, ArrayList&lt;Block&gt;&gt; getBlocks(Collecti
             </div>
         </div>
         <div id="chapter-2" class="chapter">
-            <div style="background-color: lavender">
+            <div class="chapter-background">
                 <h2>Applications</h2>
-                <h3>Plannerator</h3> <!-- Main megaproject - maybe not include that many of these are all the same program? -->
                 <div class="section">
                     <div class="section-header">
-                        <h3>Editor</h3> <!-- Algorithm-Human interactivity, include suggestors (generator algorithm) -->
+                        <h3>Plannerator: Design Editor</h3> <!-- Algorithm-Human interactivity, include suggestors (generator algorithm) -->
                         <img src="img/applications/editor.png" alt="The NuclearCraft Plannerator editor window">
                         <div class="tags">
                             <span class="tag">User Interface</span>
@@ -357,21 +358,7 @@ private static HashMap&lt;Integer, ArrayList&lt;Block&gt;&gt; getBlocks(Collecti
                 </div>
                 <div class="section">
                     <div class="section-header">
-                        <h3>DSSL Editor</h3> <!-- Programmability or something? technical side of things I guess -->
-                        <img src="img/applications/stack.png" alt="A custom code ditor for S'tack">
-                        <div class="tags">
-                            <span class="tag">User Interface</span>
-                            <span class="tag">Programming Languages</span>
-                        </div>
-                    </div>
-                    <div class="desc">
-                        <p>This is a custom code editor designed for <a href="https://github.com/tomdodd4598/Dodd-Simple-Stack-Language">Dodd Simple S'tack Language</a>.</p>
-                        <p>This editor provides syntax highlighting, formatting, a debugger with breakpoints, and other useful editing tools. The editor runs on a custom implementation of DSSL to allow debugging, and can also download and test with the standard DSSL interpreter for performance testing.</p>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="section-header">
-                        <h3>VR Editor</h3> <!-- Main VR Application -->
+                        <h3>Plannerator: VR Editor</h3> <!-- Main VR Application -->
                         <img src="img/applications/vr_planner.gif" alt="VR Editor">
                         <div class="tags">
                             <span class="tag">User Interface</span>
@@ -382,6 +369,20 @@ private static HashMap&lt;Integer, ArrayList&lt;Block&gt;&gt; getBlocks(Collecti
                     <div class="desc">
                         <p>This is the VR editor in the NuclearCraft Plannerator. This allows for editing designs directly in 3D, and offers many of the same advanced editing tools that are offered by the standard editor.</p>
                         <p>The editor is abstracted such that both editors work as if they were the same one. All of the editor tools support 2D and 3D editing. All of the modifiers support keyboard and controller-based bindings. All of the overlays and decals are drawn in 2D and 3D</p>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-header">
+                        <h3>Plannerator: DSSL Editor</h3> <!-- Programmability or something? technical side of things I guess -->
+                        <img src="img/applications/stack.png" alt="A custom code ditor for S'tack">
+                        <div class="tags">
+                            <span class="tag">User Interface</span>
+                            <span class="tag">Programming Languages</span>
+                        </div>
+                    </div>
+                    <div class="desc">
+                        <p>This is a custom code editor designed for <a href="https://github.com/tomdodd4598/Dodd-Simple-Stack-Language">Dodd Simple S'tack Language</a>.</p>
+                        <p>This editor provides syntax highlighting, formatting, a debugger with breakpoints, and other useful editing tools. The editor runs on a custom implementation of DSSL to allow debugging, and can also download and test with the standard DSSL interpreter for performance testing.</p>
                     </div>
                 </div>
                 <div class="section">
@@ -463,6 +464,8 @@ private static HashMap&lt;Integer, ArrayList&lt;Block&gt;&gt; getBlocks(Collecti
                     lastIdx = idx;
                     overlayOpacitizing = true;
                     overlay.innerHTML = document.querySelector("#chapter-"+idx).innerHTML;
+                    let h2 = document.querySelector("#overlay h2");
+                    h2.style.backgroundColor = document.defaultView.getComputedStyle(document.querySelector("#chapter-"+idx+" h2")).backgroundColor;
                 }
             }
             function clickNav(){
