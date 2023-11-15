@@ -8,14 +8,42 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Sarabun&display=swap" rel="stylesheet">
+        <style>
+            .button-link{
+                text-decoration: none;
+                color: #111111;
+                font-size: 1.2em; 
+            }
+            .button{
+                background-color: #EEEEEE;
+                display: inline-block;
+                border: 0.2em solid; /* Sliight borders, but not too significant */
+                border-radius: 0.2em;
+                margin: 1em;
+                padding: 0.5em;
+            }
+            .button:hover{
+                border: 0.4em solid #777777;
+                margin: .9em; /* keep overall size about the same */
+                padding: 0.4em;
+            }
+            .button{
+                float: left;
+            }
+            #back{
+                position: absolute;
+                left: 1em;
+                top: 1.5em;
+            }
+        </style>
     </head>
     <body>
-        <h1 id="head">Portfolio</h1>
-<!--        <a class="button-link" href="..">
+        <a id="back" class="button-link" href="..">
             <div class="button">
                 Back
             </div>
-        </a>-->
+        </a>
+        <h1 id="head">Portfolio</h1>
         <nav>
             <ul>
                 <li onmouseover="hover(0)" onmouseout="hover(-1)" onclick="clickNav()"><a href=javascript:void(0);>Hardware</a></li>
@@ -465,7 +493,9 @@ private static HashMap&lt;Integer, ArrayList&lt;Block&gt;&gt; getBlocks(Collecti
                     overlayOpacitizing = true;
                     overlay.innerHTML = document.querySelector("#chapter-"+idx).innerHTML;
                     let h2 = document.querySelector("#overlay h2");
-                    h2.style.backgroundColor = document.defaultView.getComputedStyle(document.querySelector("#chapter-"+idx+" h2")).backgroundColor;
+                    h2.style.backgroundColor = window.getComputedStyle(document.querySelector("#chapter-"+idx+" h2")).backgroundColor;
+                    let bg = document.querySelector("#overlay .chapter-background");
+                    bg.style.backgroundColor = window.getComputedStyle(document.querySelector("#chapter-"+idx+" .chapter-background")).backgroundColor;
                 }
             }
             function clickNav(){
