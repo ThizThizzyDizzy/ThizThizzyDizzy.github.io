@@ -14,11 +14,20 @@ h1{
     margin: 0px;
     margin-bottom: 1em;
 }
-h2{
-    font-size: 1.8em;
+#thiz{
+    font-size: 2.2em;
 }
 h3{
     font-size: 1.3em;
+}
+h4{
+    font-size: 2em;
+    margin: 1em;
+    
+    text-decoration: none;
+}
+h5{
+    font-size: 1.2em;
 }
 .uneven-grid{
     display: grid;
@@ -28,4 +37,13 @@ div.uneven{
     border: 0.3em solid;
     border-radius: 0.8em;
     background-color: #EEEEEE
+}
+img{
+    margin: 2em 1em;
+    width: 90%;
+}
+.links{
+    display: grid;
+    grid-auto-flow: column;
+    margin: 2em; 
 }
