@@ -47,3 +47,15 @@ img{
     grid-auto-flow: column;
     margin: 2em; 
 }
+footer{
+    text-align: center;
+    margin-top: 1.5em;
+    padding-top: 1.5em;
+    background-color: #CCCCCC;
+}
+footer div.links{
+    margin: 1em;
+}
+hr{
+    border-top: 0.2em solid #111111;
+}

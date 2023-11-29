@@ -3,8 +3,7 @@ body{
     color: #111111;
     font-family: 'Sarabun', sans-serif;
     font-size: 1.5rem;
-    padding-left: 2em;
-    padding-right: 2em;
+    margin: 0px;
 }
 .button-block, .button{
     background-color: #EEEEEE;
@@ -109,4 +108,18 @@ td p{ /* make <p> tags in a table match the formatting of those outside a table 
 .borderless, .borderless td{
     border: none;
     padding: 0;
+}
+.links{
+    display: grid;
+    grid-auto-flow: column;
+    margin: 2em; 
+}
+footer{
+    text-align: center;
+    margin-top: 1.5em;
+    padding-top: 1.5em;
+    background-color: #CCCCCC;
+}
+footer div.links{
+    margin: 1em;
 }
