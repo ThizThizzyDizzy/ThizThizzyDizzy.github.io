@@ -52,7 +52,7 @@ img{
     float: left;
     width: 1.2em; /* don't need to set height since these are always square */
 }
-.floating, .block{
+.floating{
     float: left;
     background-color: #EEEEEE;
     display: inline-block;
@@ -60,6 +60,17 @@ img{
     border-radius: 0.2em;
     margin: 1em;
     text-align: center;
+}
+.block{
+    background-color: #EEEEEE;
+    display: inline-block;
+    border: 0.2em solid #999999;
+    border-radius: 0.2em;
+    margin: 1em;
+    text-align: center;
+}
+.block img{
+    width: 90%
 }
 .centered, .centered-row{
     text-align: center;
