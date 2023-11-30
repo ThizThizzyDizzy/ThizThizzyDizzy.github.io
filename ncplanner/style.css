@@ -4,6 +4,7 @@ body{
     font-family: 'Sarabun', sans-serif;
     font-size: 1.5rem;
     margin: 0px;
+    padding: 0px;
 }
 .button-block, .button{
     background-color: #EEEEEE;
@@ -22,7 +23,12 @@ body{
     float: left;
 }
 h1{
-    margin: 1.6em;
+    text-align: center;
+    padding: 1.6em;
+}
+.header{
+    background-color: #CCCCCC;
+    margin-top: 0px;
 }
 h2, h3, p, ul, ol{
     color: #111111;
@@ -84,9 +90,6 @@ img{
     text-decoration: none;
     color: #111111;
     font-size: 1.2em; 
-}
-h1, .header{
-    text-align: center;
 }
 .variable, .expression{ /* I wanted these to look different, but I couldn't settle on a different style for .variable that looked good enough */
     display: inline-block;
