@@ -140,3 +140,21 @@ footer div.links{
 .content{
     margin: 1em;
 }
+@media screen and (max-width: 600px){
+    h1{
+        text-align: center;
+        font-size: 1.6em;
+    }
+    .button-block, .button{
+        display: block;
+    }
+    .button-block img{
+        width: 80%;
+    }
+    .large-bordered-img{
+        margin: 0px;
+    }
+    .links{
+        grid-auto-flow: row;
+    }
+}

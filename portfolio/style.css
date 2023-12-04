@@ -230,4 +230,7 @@ footer div.links{
         font-weight: bold;
         margin: 1em 2em;
     }
+    .links{
+        grid-auto-flow: row;
+    }
 }
