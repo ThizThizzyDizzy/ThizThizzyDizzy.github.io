@@ -59,3 +59,12 @@ footer div.links{
 hr{
     border-top: 0.2em solid #111111;
 }
+@media screen and (max-width: 600px){
+    .uneven-grid{
+        display: flex;
+        flex-direction: column;
+    }
+    .links{
+        grid-auto-flow: row;
+    }
+}
