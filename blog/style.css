@@ -1,10 +1,18 @@
 body{
-    background-color: #CCCCCC;
+    background-color: #DDDDDD;
     color: #111111;
+    margin: 0px;
     font-family: 'Sarabun', sans-serif;
-    font-size: 1.5rem;
-    padding-left: 2em;
-    padding-right: 2em;
+    font-size: 1.5em;
+    text-align: center;
+}
+h1{
+    margin: 1.6em;
+    background-color: #CCCCCC;
+    font-size: 3em;
+    padding: 1em;
+    margin: 0px;
+    margin-bottom: 1em;
 }
 .button-block, .button{
     background-color: #EEEEEE;
@@ -23,90 +31,38 @@ body{
     float: left;
 }
 h1{
-    margin: 1.6em;
-}
-h2, h3, p, ul, ol{
-    color: #111111;
+    font-size: 2em;
+    padding: 1em;
+    margin: 0px;
+    margin-bottom: 9rem;
 }
 h3{
     font-size: 1.3em;
-}
-img{
-    width: 4.5rem;
-    image-rendering: pixelated;
-}
-.button-block img, .floating img{
-    width: 20em;
-    margin: 1em;
-    image-rendering: auto;
-}
-.button-block img{
-    width: 14em;
-}
-.large-bordered-img{
-    width: 40em;
-    margin: 1em;
-    border: 0.2em solid #333333;
-    border-radius: 0.3em;
-}
-.icon{
-    float: left;
-    width: 1.2em; /* don't need to set height since these are always square */
-}
-.floating, .block{
-    float: left;
-    background-color: #EEEEEE;
-    display: inline-block;
-    border: 0.2em solid #999999;
-    border-radius: 0.2em;
-    margin: 1em;
-    text-align: center;
-}
-.centered, .centered-row{
-    text-align: center;
-}
-.centered-row div{
-    display: inline-block;
-    margin: 1rem;
-    font-size: 0; /* removes the gap between images */
 }
 .button-link{
     text-decoration: none;
     color: #111111;
     font-size: 1.2em; 
 }
-h1, .header{
+h1{
     text-align: center;
 }
-.variable, .expression{ /* I wanted these to look different, but I couldn't settle on a different style for .variable that looked good enough */
-    display: inline-block;
-    font-family: 'Courier Prime', monospace;
-    background-color: #EEEEEE;
-    border: 0.1em #555555 solid;
-    padding: 0em 0.1em 0em 0.1em;
-    border-radius: 0.2em;
+#timestamps{
+    display: grid;
+    grid-auto-flow: column;
+    font-size: 0.7em;
 }
-table{
-    width: 100%;
+.links{
+    display: grid;
+    grid-auto-flow: column;
+    margin: 2em; 
 }
-table, th, td{
+footer{
     text-align: center;
-    font-size: 1.1em;
-    padding: 0.5em;
-    border-collapse: collapse;
+    margin-top: 1.5em;
+    padding-top: 1.5em;
+    background-color: #CCCCCC;
 }
-th, td{ /* No border on the table itself because I want the footer to float below it */
-    border: 0.2em #555555 solid;
-}
-tfoot td{
-    border: none;
-}
-td p{ /* make <p> tags in a table match the formatting of those outside a table */
-    padding: 0em;
-    margin: 0em;
-    font-size: 1.5rem;
-}
-.borderless, .borderless td{
-    border: none;
-    padding: 0;
+footer div.links{
+    margin: 1em;
 }
