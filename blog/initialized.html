@@ -7,15 +7,25 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <a class="button-link" href="..">
+        <a class="button-link" href="./">
             <div class="button">
                 Back
             </div>
         </a>
         <h1 id="head">The Blog of ThizThizzyDizzy</h1>
-<!--        <div id='tags'>
-        </div>-->
-        <div id='entries'>
+        <h2 id='title'>Title</h2>
+        <div>
+            <p>I've decided to start a blog!</p>
+            <p>This will contain all of my public posts, reviews, rants, and ramblings from here on out, so I don't have to keep linking and repeating various discord messages.</p>
+            <p>All entries are tagged, so they'll be easier to search and sort in the future, when there's enough blog entries to actually warrant filtering them.</p>
+        </div>
+        <div id='timestamps'>
+            <div>
+                <p>Created <span id="date-created"></span></p>
+            </div>
+            <div>
+                <p>Last Modified <span id="date-modified"></span></p>
+            </div>
         </div>
         <footer>
             <div class='links'>
@@ -39,26 +49,6 @@
             </div>
             <br>
         </footer>
-        <script>
-            var tags = [];
-            var xmlhttp;
-            if(window.XMLHttpRequest)xmlhttp = new XMLHttpRequest();
-            else xmlhttp = new ActiveXObjefct("Microsoft.XMLHTTP");
-            xmlhttp.onreadystatechange = function(){
-                if(xmlhttp.readyState===4 && xmlhttp.status===200){
-                    var obj = JSON.parse(xmlhttp.responseText);
-                    for(let entry of obj.entries){
-                        for(let tag of entry.tags){
-                            if(!tags.includes(tag))tags.push(tag);
-                        }
-                        var div = document.querySelector("#entries");
-                        div.innerHTML += "<h3><a href='"+entry.path+".html'>"+entry.title+"</a></h3>";
-                    }
-//                    document.querySelector("#tags").innerHTML = JSON.stringify(tags);
-                }
-            }
-            xmlhttp.open("GET", "index.json", true);
-            xmlhttp.send();
-        </script>
+        <script src='blog.js'></script>
     </body>
 </html>
