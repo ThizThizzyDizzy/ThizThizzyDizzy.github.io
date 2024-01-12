@@ -8,6 +8,15 @@
             "path": "initialized",
             "created": "2024-01-10",
             "modified": "2024-01-10"
+        },
+        {
+            "tags": [
+                "vr"
+            ],
+            "title": "My VR Setup",
+            "path": "vr_setup",
+            "created": "2024-01-12",
+            "modified": "2024-01-12"
         }
     ]
 }
