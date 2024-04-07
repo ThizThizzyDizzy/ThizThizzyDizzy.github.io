@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Blog</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Fixing the Pimax Lighthouse Faceplate" property="og:title">
+        <meta content="Fixing controller tracking on the Pimax Crystal's Lighthouse Faceplate" property="og:description">
+        <meta content='https://www.thizthizzydizzy.com/blog/img/pimax_lighthouse_faceplate.jpg' property='og:image'>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <a class="button-link" href="./">
+            <div class="button">
+                Back
+            </div>
+        </a>
+        <h1 id="head">The Blog of ThizThizzyDizzy</h1>
+        <h2 id='title'>Title</h2>
+        <div>
+            <h3>The Issue</h3>
+            <p>
+                When using any lighthouse controller or tracker connected through the lighthouse faceplate, they drift and lose tracking easily, with generally poor quality tracking.
+                This appears to be caused by electrical interference between the Crystal's WIFI antenna and the antennas for the watchman dongles in the faceplate.
+                I was able to fix this by rerouting the wires and relocating the antennas. My controller tracking works flawlessly now, just like it did with my index headset
+            </p>
+            <p><strong>WARNING: THIS WILL VOID YOUR WARRANTY. DON'T DO THIS UNLESS YOU KNOW WHAT YOU ARE DOING AND ACCEPT THE CONSEQUENSES</strong></p>
+            <h3>Before you start</h3>
+            <ul>
+                <li>Choose where you want to move the antennas and how you want to route the wires. The route I chose (left side of the image) seems to work well for me, but this choice was made somewhat arbitrarily, as I was just trying to move them away from the WIFI antenna on the crystal.</li>
+                <li><strong>You may have to cut a channel to route the wires through.</strong> There is very little clearance between the crystal and the inside of the faceplate. I cut a small channel on the inside where the cable passes by the groove at the bottom of the headset. <strong>If you don't do this, the faceplate may not sit right on the headset, and may not function correctly.</strong> Do not try to force it into place, that may damage the antennas.</li>
+            </ul>
+            <img style="height: 20em" src="img/pimax_lighthouse_faceplate.jpg" alt="An image showing the original and modified cable routing and antenna placement">
+            <ol>
+                <li>Remove the lighthouse faceplate</li>
+                <li><strong>Gently</strong> remove the cable management sticker on the bottom center, (not pictured, but it will be covering the four clips where the two wires pass each other) Save this sticker, as you may wish to reuse it in later steps.<br>Then, for each antenna: (The same process is mirrored on both sides; the image shows the original layout on the right and the modified layout on the left)</li>
+                <li><strong>Gently</strong> pull the wire out of the cable management clips in the bottom center of the faceplate</li>
+                <li><strong>Gently</strong> peel up the antenna (they are the stickers that start with RX-Lighthouse-L and RX-Lighthouse-R)<br><strong>BE CAREFUL, these "stickers" are the antennas, so don't tear, fold, or otherwise damage them</strong></li>
+                <li>Lay down the antenna in your desired spot. (lay the antenna flat, sticking it back to the faceplate. Try not to put any unnecessary stress on it, and make sure the wire fits through your desired route)</li>
+                <li><strong>Gently</strong> route the wire, and optionally re-use the sticker from step 2 to hold them in place. (I cut the sticker in half and used each half of the sticker for one of the wires; one of these can be seen in the image holding down the left wire)</li>
+                <li>Repeat steps 3-6 with the other antenna<li>
+                <li><strong>Gently</strong> place the lighthouse faceplate onto the crystal. if the clips do not want to engage, (particularly on the bottom), do not force it. Remove the faceplate again and ensure the wires have suitable space and are not being pinched.</li>
+            </ol>
+        </div>
+        <div id='timestamps'>
+            <div>
+                <p>Created <span id="date-created"></span></p>
+            </div>
+            <div>
+                <p>Last Modified <span id="date-modified"></span></p>
+            </div>
+        </div>
+        <footer>
+            <div class='links'>
+                <div>
+                    <div>Support me on</div>
+                    <div class='links'>
+                        <p><a href=https://www.patreon.com/thizthizzydizzy>Patreon</a></p>
+                        <p><a href=https://ko-fi.com/thizthizzydizzy>Ko-Fi</a></p>
+                    </div>
+                </div>
+                <div>
+                    <p>Thank you for visiting.</p>
+                    <p>Have a great day!</p>
+                </div>
+                <div>
+                    <div>Find me on</div>
+                    <div class='links'>
+                        <p><a href=https://discord.gg/dhcPSMt>Discord</a></p>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </footer>
+        <script src='blog.js'></script>
+    </body>
+</html>
