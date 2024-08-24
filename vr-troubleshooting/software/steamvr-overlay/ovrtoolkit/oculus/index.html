@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>OVR Toolkit</title>
+        <title>OVRToolkit - Oculus Issues</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../../../blog/style.css">
+        <link rel="stylesheet" href="../../../../../blog/style.css">
     </head>
     <body>
         <a class="button-link" href="../">
@@ -13,12 +13,14 @@
             </div>
         </a>
         <h1 id="head">VR Troubleshooting (WIP)</h1>
-        <h2 id='title'>OVR Toolkit</h2>
+        <h2 id='title'>OVRToolkit - Oculus Issues</h2>
         <div>
-            <p>What issue are you having?</p>
-            <p><a href="./sub-window-resizing/">OBS chat windows keep resizing</a> (Also applies to other programs with sub-windows)<br><span style='font-size: 0.5em'>1 potential solution</span></p>
-            <p><a href="./oculus/">OVRToolkit won't appear in-game</a> (And I'm using an oculus/meta headset)<br><span style='font-size: 0.5em'>2 potential solutions, 1 external resource</span></p>
-            <p>For more troubleshooting support, see the <a href="https://wiki.ovrtoolkit.co.uk/#/Troubleshooting">OVR Toolkit wiki</a></p>
+            <p>The game must be running through the SteamVR runtime.</p>
+            <p><strong>OpenXR</strong></p>
+            <p>If you are using OpenXR, ensure SteamVR is set as the default OpenXR Runtime. (SteamVR Settings > OpenXR tab > Set as default runtime)</p>
+            <p><strong>Launch options</strong></p>
+            <p>Many games will accept launch arguments that tell it to run through SteamVR. Try <strong>-vrmode openvr</strong> or <strong>-hmd=SteamVR</strong> (Right click the game > Properties > Launch options)</p>
+            <p>For more troubleshooting support, see the <a href="https://wiki.ovrtoolkit.co.uk/#/Oculus">OVRToolkit wiki (Oculus Fixes)</a></p>
         </div>
         <footer>
             <div class='links'>
