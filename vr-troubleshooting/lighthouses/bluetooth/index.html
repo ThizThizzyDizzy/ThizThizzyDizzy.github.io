@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SteamVR Lighthouses - Bluetooth</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../../blog/style.css">
+    </head>
+    <body>
+        <a class="button-link" href="../">
+            <div class="button">
+                Back
+            </div>
+        </a>
+        <h1 id="head">VR Troubleshooting (WIP)</h1>
+        <h2 id='title'>SteamVR Lighthouses - Bluetooth</h2>
+        <div>
+            <p>You don't actually need to connect your base stations for your devices to track! All tracking information is transmitted solely through IR lasers emitted from the base station. Bluetooth is used solely for Firmware updates, power managment, and changing channels.</p>
+            <p>Base stations use BLE, so make sure you have a new enough bluetooth chip that supports it. Note that even if you do, SteamVR sometimes won't detect them anyway. However, here are some alternate solutions for things you might need:</p>
+            <p><strong>Change channels with the button on the back of the base station</strong></p>
+            <p>If you just need to change the channel on your base stations, there is a small button on the back of it that does this.</p>
+            <p><strong>Power management via Lighthouse Power Management (Android)</strong></p>
+            <p>For manual power management, you can try the <a href='https://play.google.com/store/apps/details?id=com.jeroen1602.lighthouse_pm'>Lighthouse Power Management</a> app. It's still not very reliable though, but I've had more success with it than with SteamVR doing its power management.</p>
+            <p><strong>Power management via a smart plug</strong></p>
+            <p>If you happen to have some extra smart plugs lying around, this is an effective way to ensure your base stations turn off when you need them to. (As another note, you can set up VR Manager to automatically trigger these through HomeAssistant via a webhook)</p>
+        </div>
+        <footer>
+            <div class='links'>
+                <div>
+                    <div>Support me on</div>
+                    <div class='links'>
+                        <p><a href=https://www.patreon.com/thizthizzydizzy>Patreon</a></p>
+                        <p><a href=https://ko-fi.com/thizthizzydizzy>Ko-Fi</a></p>
+                    </div>
+                </div>
+                <div>
+                    <p>Thank you for visiting.</p>
+                    <p>Have a great day!</p>
+                </div>
+                <div>
+                    <div>Find me on</div>
+                    <div class='links'>
+                        <p><a href=https://discord.gg/dhcPSMt>Discord</a></p>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </footer>
+        <script src='blog.js'></script>
+    </body>
+</html>
