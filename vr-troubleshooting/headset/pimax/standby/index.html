@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pimax Headset/Controllers</title>
+        <title>Pimax - Standby Mode</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../../blog/style.css">
+        <link rel="stylesheet" href="../../../../blog/style.css">
     </head>
     <body>
         <a class="button-link" href="../">
@@ -13,14 +13,11 @@
             </div>
         </a>
         <h1 id="head">VR Troubleshooting (WIP)</h1>
-        <h2 id='title'>Pimax Headset/Controllers</h2>
+        <h2 id='title'>Pimax - Standby Mode</h2>
         <div>
-            <p>Which device are you having trouble with?</p>
-            <p>What issue are you having?</p>
-            <p><a href="./error-codes/">I have an error code</a> (from pimax play)<br><span style='font-size: 0.5em'>19 known issues, 20 potential solutions</span></p>
-            <p><a href="./crystal/">Pimax Crystal or Crystal Light</a><br><span style='font-size: 0.5em'>2 known issues, 9 potential solutions</span></p>
-            <p><a href="./crystal-controllers/">Pimax Crystal Controllers</a> (the inside-out tracked controllers for the Crystal and Crystal Light)<br><span style='font-size: 0.5em'>1 known issue, 0 potential solutions</span></p>
-            <p><a href="./standby/">My controllers/vive trackers keep turning off</a> (When using pimax play or any pimax headset))<br><span style='font-size: 0.5em'>1 potential solution</span></p>
+            <p>Pimax has a standby mode that activates after a period of time where the headset is not moving. This is 3 minutes by default. When this triggers, all controllers and trackers will power off. (This may do other things as well, but I have not confirmed anything else.)</p>
+            <p><strong>Disable the pimax standby timer</strong></p>
+            <p>Open the JSON file located at %LOCALAPPDATA%\Pimax\runtime\profile.json, and change the setting for standby_timeout_min to 0. This setting is the number of minutes until standby mode is activated. 0 will disable this altogether.</p>
         </div>
         <footer>
             <div class='links'>
