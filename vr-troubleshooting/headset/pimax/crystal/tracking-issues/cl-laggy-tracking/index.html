@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pimax Error 10933</title>
+        <title>Pimax Crystal/Light</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../../../../blog/style.css">
+        <link rel="stylesheet" href="../../../../../../blog/style.css">
     </head>
     <body>
         <a class="button-link" href="../">
@@ -13,14 +13,12 @@
             </div>
         </a>
         <h1 id="head">VR Troubleshooting (WIP)</h1>
-        <h2 id='title'>Pimax Error 10933</h2>
+        <h2 id='title'>Pimax Crystal/Light</h2>
         <div>
-            <p>The device is currently in use</p>
-            <p><strong>Solution</strong></p>
-            <p>Reconnect the DP cable<br>Switch to another available DP port on the dedicated graphics card, or restart the computer</p>
-            <p>Source: <a href="https://discord.com/channels/1152070918462525461/1155345298957283329/1278523099293290517">Pimax</a></p>
-            <p><strong>Update Graphics Drivers</strong></p>
-            <p>This error can be caused by outdated graphics drivers.</p>
+            <p><strong>Set piserver.exe to High priority</strong></p>
+            <p>Since the crystal light tracking is calculated on your PC rather than by the headset, it will be affected by other processes. Open task manager, locate piserver.exe, and set priority to high.</p>
+            <p><strong>Disable HAGS (Hardware Accelerated GPU Scheduling)</strong></p>
+            <p>Windows may prioritize your game over the crystal's tracking. If you continue to have laggy tracking, disable HAGS in windows settings.</p>
         </div>
         <footer>
             <div class='links'>

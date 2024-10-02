@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pimax Error 10933</title>
+        <title>Pimax - Standby Mode</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../../../../blog/style.css">
+        <link rel="stylesheet" href="../../../../blog/style.css">
     </head>
     <body>
         <a class="button-link" href="../">
@@ -13,14 +13,11 @@
             </div>
         </a>
         <h1 id="head">VR Troubleshooting (WIP)</h1>
-        <h2 id='title'>Pimax Error 10933</h2>
+        <h2 id='title'>Pimax - Standby Mode</h2>
         <div>
-            <p>The device is currently in use</p>
-            <p><strong>Solution</strong></p>
-            <p>Reconnect the DP cable<br>Switch to another available DP port on the dedicated graphics card, or restart the computer</p>
-            <p>Source: <a href="https://discord.com/channels/1152070918462525461/1155345298957283329/1278523099293290517">Pimax</a></p>
-            <p><strong>Update Graphics Drivers</strong></p>
-            <p>This error can be caused by outdated graphics drivers.</p>
+            <p>Pimax has a standby mode that activates after a period of time where the headset is not moving. This is 3 minutes by default. When this triggers, all controllers and trackers will power off. (This may do other things as well, but I have not confirmed anything else.)</p>
+            <p><strong>Disable the pimax standby timer</strong></p>
+            <p>Open the JSON file located at %LOCALAPPDATA%\Pimax\runtime\profile.json, and change the setting for standby_timeout_min to 0. This setting is the number of minutes until standby mode is activated. 0 will disable this altogether.</p>
         </div>
         <footer>
             <div class='links'>
