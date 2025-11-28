@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Blog</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="The Blog of ThizThizzyDizzy"/>
+        <meta property="og:description" content="DizzyRPC (Beta)"/>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <a class="button-link" href="./">
+            <div class="button">
+                Back
+            </div>
+        </a>
+        <h1 id="head">The Blog of ThizThizzyDizzy</h1>
+        <h2 id='title'>DizzyRPC (Beta)</h2>
+        <div id="content">
+            <p>
+                Udon networking in VRChat leaves a lot to be desired, especially for Games. VRChat enforces very strict limits on network bandwidth, while being incredibly wasteful if you are not careful.
+
+            </p>
+            <p>
+                In Udon, there are two ways to send data from one client to another: Network events and Synced variables.
+            </p>
+            <p>
+                Network events are easy to use, but are heavily limited. There's a global limit of 100 events per second in the entire world. Additionally, network events are only processed every second, meaning they suffer from up to a second of random latency, even in ideal conditions.
+            </p>
+            <p>
+                Synced variables do not have these problems, but they are not designed to be used like events, and have some quirks that must be handled properly if you choose to do so.
+            </p>
+            <p>
+                DizzyRPC aims to combine the best of both worlds, while making them both easier to use than events, and offering some additional functionality as well.
+            </p>
+            <h3 id='Methods'>Using DizzyRPC</h3>
+            <p>
+                DizzyRPC is designed to be very easy to use in U#, similarly to an event. To create an RPC method is as simple as this:
+            </p>
+            <pre class='code'><code class='language-cs'>
+                [RPCMethod]
+                public void _SomeMethod(){
+                    // do something incredibly awesome
+                }
+            </code></pre>
+            <p>
+                And to call it from another client is as simple as this:
+            </p>
+            <pre class='code'><code class='language-cs'>
+                _SendRPC_SomeMethod(null); // 'null' here means send to all players
+            </code></pre>
+            <p>
+                This will run <span class='code'>_SomeMethod()</span> on the same object for all other players. You can add as many parameters to the method as you want.
+            </p>
+            <p>
+                But you may be asking: Hey, what is this <span class='code'>_Send_SomeMethod</span>? Where did it come from? Well, I'm so glad you asked.</p>
+            <p>
+                DizzyRPC does this through code generation. In this example, the following code was generated at the bottom of the file:
+            </p>
+            <pre class='code'><code class='language-cs'> 
+               #region Generated RPCs (DO NOT EDIT)
+                [UnityEngine.SerializeField] private DizzyRPC.RPCManager _rpc_manager;
+
+                public void _SendRPC_SomeMethod(VRC.SDKBase.VRCPlayerApi target) {
+                    _rpc_manager._SendVariable(target, DizzyRPC.RPCChannel.RPC_Example__SomeMethod, false);
+                }
+                #endregion
+            </code></pre>
+            <p>
+                This automatically handles all internal references to DizzyRPC, so you don't have to worry about it. The <span class=code>_rpc_manager</span> field is also automatically set in Unity, thanks to <a href='https://github.com/LiveDimensions/VRRefAssist'>VRRefAssist</a>.
+            </p>
+            <p>
+                There's just one problem: How does DizzyRPC run this on the same object for another player?
+            </p>
+            <h3 id='Routing'>Routing</h3>
+            <p>
+                For an RPC to be sent to the same object, that object has to be uniquely identified for both players. With traditional Udon networking, this is done automatically via Network IDs. However, this only works with objects that exist in the editor at build time. This means that all objects instantiated at runtime cannot be networked.
+            </p>
+            <p>
+                DizzyRPC solves this by routing ALL messages through a Player Object, since player objects are guaranteed to exist for all players. For DizzyRPC to know where to send an RPC, each script containing an <span class='code'>[RPCMethod]</span> must be uniquely identified. There are a couple ways to do this:
+            </p>
+            <h4 id='Singletons'>Singletons</h4>
+            <p>A singleton is an object that exists once, and only once. This could be any object that exists in the world when it is built, and thus exists for all players. If your script is on a Singleton, this is what you need:</p>
+            <pre class='code'><code class='language-cs'>
+                using VRRefAssist;
+
+                [Singleton]
+                public class SomeScript : U#Behavior {
+                    // something incredibly awesome
+                }
+            </code></pre>
+            <p>
+                That's it! As long as you only have one instance of this script, DizzyRPC will route all of its RPCs with no issue.
+            </p>
+            <p>
+                But what about things that aren't singletons, like items spawned dynamically at runtime? That's where you use a Router.
+            </p>
+            <h4 id='Routers'>Routers</h4>
+            <p>
+                A router is a singleton that uniquely identifies other objects so that they may hold RPCs. This should generally be attached to an object pool, to route RPCs to and from objects within that pool.
+            </p>
+            <pre class='code'><code class='language-cs'>
+                using DizzyRPC;
+                using VRRefAssist;
+
+                [Singleton]
+                public class SomeRouter : RPCRouter&lt;SomeRoutedScript, int&gt;
+                {
+                    public override SomeRoutedScript _Route(int id)
+                    {
+                        // Return the SomeRoutedScript that corresponds to `id`
+                    }
+
+                    public override int _GetId(SomeRoutedScript routedObject)
+                    {
+                        // Return the ID that corresponds to `routedObject`
+                    }
+                }
+            </code></pre>
+            <p>
+                A router is defined with two things: The script that it should route RPCs for, and the type of ID that should be used to route it. So in this example, <span class='code'>RPCRouter&lt;SomeRoutedScript, int&gt;</span> means that this routes to <span class='code'>SomeRoutedScript</span> using an <span class='code'>int</span> for the ID. (You can use any VRC-serializable type for an ID)
+            </p>
+            <p>
+                A router must override the above methods to convert the script object to an ID, and convert an ID back to the script object. DizzyRPC handles the rest.
+            </p>
+            <h3 id='Hooks'>Hooks</h3>
+            <p>
+                RPC Hooks allow you to monitor any RPC from another script, and even reject incoming RPCs. RPC Hooks can be defined in any Singleton, and are run after an RPC is received, but before the RPC is run.
+            </p>
+            <pre class='code'><code class='language-cs'>
+                [RPCHook(typeof(SomeScript), nameof(SomeScript._SomeMethod))]
+                public bool _SomeHook()
+                {
+                    // some awesome monitoring
+                }
+            </code></pre>
+            <p>
+                Hooks may also reference any variable from the RPC, using a parameter with the same name and type. The routing ID from a routed RPC may be referenced with a parameter named <span class='code'>_id</span>.
+            </p>
+            <p>
+                Hooks must return <span class='code'>true</span> to allow the RPC to run. If <span class='code'>false</span> is returned, the RPC will be discarded. This can be used to check & validate incoming RPCs.
+            </p>
+            <h3 id='Customization'>RPC Customization</h3>
+            <p>
+                DizzyRPC supports sending RPCs via either Events, or via Variables. This can be specified using the parameters of the <span class='code'>RPCMethod</span> attribute. (It will default to Variable if not specified)
+            </p>
+            <pre class='code'><code class='language-cs'>
+                [RPCMethod(
+                    enforceSecure: false,
+                    allowDropping: true,
+                    requireLowLatency: false,
+                    ignoreDuplicates: false,
+                    mode:RPCSyncMode.Automatic)]
+            </code></pre>
+            <p>
+                Customizing any of these values may force the RPC to be an event or a variable, or this can be specified using <span class='code'>mode</span>. All values shown above are the defaults, here's what each one does:
+            </p>
+            <p>
+                <em>enforceSecure</em> - This specifies that this RPC must only be transmitted to the target client. This will enforce <span class='code'>RPCSyncMode.Event</span> (Synced variables are always sent to all players)
+            </p>
+            <p>
+                <em>allowDropping</em> - This allows RPCs to be dropped if the network clogs up. If set to <span class='code'>false</span>, this will enforce <span class='code'>RPCSyncMode.Event</span>
+            </p>
+            <p>
+                <em>requireLowLatency</em> - This specifies that this RPC must always be transmitted with minimal delay. This will enforce <span class='code'>RPCSyncMode.Variable</span>
+            </p>
+            <p>
+                <em>ignoreDuplicates</em> - This method ensures that the same RPC will not be sent twice in the same sync. This is only applicable to variables, so this will enforce <span class='code'>RPCSyncMode.Variable</span>
+            </p>
+            <p>
+                <em>mode</em> - This can be used to manually specify what mode an RPC should use, rather than choosing by intent.
+            </p>
+            <h3 id='Unity'>DizzyRPC in the Unity Editor</h3>
+            <p>
+                All DizzyRPC functions can be accessed under Tools > DizzyRPC. Here's what they do:
+            </p>
+            <h4 id='Compile'>Compile RPCs</h4>
+            <p>
+                This runs the code generation to make the RPCs function and generate the aforementioned <span class='code'>_SendRPC</span> methods. There are three options under this section:
+            </p>
+            <p>
+                <em>Compile for Build</em> - This compiles all RPCs with full functionality. <strong>This must be done before building for DizzyRPC to function.</strong>
+            </p>
+            <p>
+                <em>Compile for Editor</em> - This compiles RPCs in a minimal state with no functionality. This helps avoid compiler errors while modifying code. This must be done before editing any RPC method to avoid errors in generated code. If you do cause errors in generated code, contents of the <span class='code'>Generated RPCs (DO NOT EDIT)</span> section can be deleted to eliminate the errors, then re-generated by compiling RPCs again.
+            </p>
+            <p>
+                <em>Remove all generated Code</em> - This removes ALL generated code from your files. This WILL cause compiler errors if you are using any RPC methods. This is intended for if you want to remove DizzyRPC from a project.
+            </p>
+            <h4 id='Settings'>Settings</h4>
+            <p>DizzyRPC has a few settings to automatically compile RPCs, so you don't have to do it manually:</p>
+            <p>
+                <em>Auto Recompile RPCs in Editor</em> - This will automatically recompile RPCs in Editor mode any time changes are made. Be careful with this, as most code editors will <strong>not</strong> automatically reload the file when the code is changed externally. (This setting is turned OFF by default)
+            </p>
+            <p>
+                <em>Auto Recompile RPCs for Play Mode</em> - This will automatically recompile RPCs in Build mode when you enter play mode, and back to Editor mode when you exit play mode. (This setting is turned ON by default)
+            </p>
+            <p>
+                <em>Auto recompile RPCs on Build</em> - This will automatically recompile RPCs in Build mode when you start a build. (This setting is turned ON by default)
+            </p>
+            <h3 id='Graph'>Udon Graph</h3>
+            <p>
+                Oh, I almost forgot! That's right, DizzyRPC <strong>fully supports Udon Graph.</strong> (Including code generation)
+            </p>
+            <br>
+            <p>
+                When selecting an Udon Graph Program Asset, DizzyRPC will appear in the inspector above the normal Udon Graph section:
+            </p>
+            <img src='img/dizzyrpc/inspector_base.jpg' alt='DizzyRPC Inspector'/>
+            <p>
+                This allows you to configure all the same settings that can be done for RPCs in U#. This includes:
+            </p>
+            <h4 id='Graph-Methods'>Methods</h4>
+            <p>
+                RPC Methods in Udon Graph must be defined in the inspector:
+            </p>
+            <img src='img/dizzyrpc/inspector_method.jpg' alt='DizzyRPC Inspector showing a Method'/>
+            <p>
+                Once the RPCs are compiled, the following sections will be generated in the Udon Graph:<br>
+                <span class='note'>(All udon graph generated code includes instructions on how to use it, so I won't detail that here)</span>
+            </p>
+            <img src='img/dizzyrpc/graph_method.jpg' alt='DizzyRPC RPCMethod section in an Udon Graph'/>
+            <br>
+            <img src='img/dizzyrpc/graph_send.jpg' alt='DizzyRPC _SendRPC section in an Udon Graph'/>
+            <p>
+                <span class='code'>_RPC_</span> sections will always be placed on the far-left edge of the graph, and <span class='code'>_RPC_SEND_</span> sections will always be placed on the far-right edge of the graph. Only the specified notes may be connected to in the specified ways. Any other connections will be lost when RPCs are compiled.
+            </p>
+            <h4 id='Graph-Routers'>Routers</h4>
+            <p>
+                Routers in Udon Graph are also defined in the inspector:
+            </p>
+            <img src='img/dizzyrpc/inspector_router.jpg' alt='DizzyRPC Inspector showing a Router'/>
+            <p>
+                And the following graph sections are generated for a Router:
+            </p>
+            <img src='img/dizzyrpc/graph_router.jpg' alt='DizzyRPC _RPC_Router section in an Udon Graph'/>
+            <br>
+            <img src='img/dizzyrpc/graph_router_getid.jpg' alt='DizzyRPC _RPC_Router_GetId section in an Udon Graph'/>
+            <p>
+                Routers will always be placed on the bottom edge of the graph. Code should be placed above them.
+            </p>
+            <h4 id='Graph-Hooks'>Hooks</h4>
+            <p>
+                RPC Hooks in Udon Graph are also defined in the inspector:
+            </p>
+            <img src='img/dizzyrpc/inspector_hook.jpg' alt='DizzyRPC Inspector showing an RPC Hook'/>
+            <p>
+                And the following graph section is generated for each RPC Hook:
+            </p>
+            <img src='img/dizzyrpc/graph_hook.jpg' alt='DizzyRPC _RPC_Hook section in an Udon Graph'/>
+            <p>
+                RPC Hooks will always be placed on the bottom edge of the graph. Code should be placed above them.
+            </p>
+            <h4 id='Interfacing'>Interfacing between U# and Udon Graph</h4>
+            <p>
+                Oh, did I mention? You can make routers or hooks for U# or Udon Graph, from either U# or Udon Graph.
+            </p>
+            <p>
+                For Udon Graph, there is no notable difference. All available RPCs will be selectable in the inspector, whether U# or Udon Graph.
+            </p>
+            <p>
+                For an U# Router to route RPCs for an Udon Graph program, the router looks a little different:
+            </p>
+            <pre class='code'><code class='language-cs'>
+                using DizzyRPC;
+                using DizzyRPC.Attribute;
+                using VRC.Udon;
+                using VRRefAssist;
+
+                [RPCGraphRouter("SomeGraph")]
+                [Singleton]
+                public class SharpRpcGraphRouter : RPCRouter&lt;int&gt;
+                {
+                    public override UdonBehaviour _Route(int id)
+                    {
+                        // Return the UdonBehavior that corresponds to `id`
+                    }
+
+                    public override int _GetId(UdonBehaviour routedObject)
+                    {
+                        // Return the ID that corresponds to `routedObject`
+                    }
+                }
+            </code></pre>
+            <p>
+                Here, the program to route is specified in the <span class='code'>[RPCGraphRouter]</span> attribute, and the routed object type is always <span class='code'>UdonBehavior</span>. The router otherwise works the same way.
+            </p>
+            <p>
+                For an U# RPC Hook to hook into an Udon Graph RPC, this also requires special handling:
+            </p>
+            <pre class='code'><code class='language-cs'>
+                [RPCHook("SomeGraph", "SomeMethod")]
+                public bool _SomeHook()
+                {
+                    // some awesome graph monitoring
+                }
+            </code></pre>
+            <p>
+                Rather than using the behavior Type in the <span class='code'>[RPCHook]</span> attribute, pass in the name of the Udon Graph program. Otherwise, the hook works the same.
+            </p>
+            <h3 id='license'>License & Downloads</h3>
+            <p>
+                DizzyRPC is licensed under the MPL v2.0. This means you can use it freely in any project, provided that you:
+            </p>
+            <ul>
+                <li>List DizzyRPC in the credits section of your world.</li>
+                <li>Make all changes to the DizzyRPC source files available under the same or compatible license.</li>
+            </ul>
+            <p><sub class="note">This is not legal advice. See full license terms at <a href="https://www.mozilla.org/en-US/MPL/2.0/">https://www.mozilla.org/en-US/MPL/2.0/</a></sub></p>
+            <p>DizzyRPC can be downloaded from <a href="https://github.com/ThizThizzyDizzy/DizzyRPC">GitHub</a></p>
+            <br>
+            <p>Thanks for reading! I hope you find it useful.</p>
+        </div>
+        <div id='timestamps'>
+            <div>
+                <p>Created <span id="date-created"></span></p>
+            </div>
+            <div>
+                <p>Last Modified <span id="date-modified"></span></p>
+            </div>
+        </div>
+        <footer>
+            <div class='links'>
+                <div>
+                    <div>Support me on</div>
+                    <div class='links'>
+                        <p><a href=https://www.patreon.com/thizthizzydizzy>Patreon</a></p>
+                        <p><a href=https://ko-fi.com/thizthizzydizzy>Ko-Fi</a></p>
+                    </div>
+                </div>
+                <div>
+                    <p>Thank you for visiting.</p>
+                    <p>Have a great day!</p>
+                </div>
+                <div>
+                    <div>Find me on</div>
+                    <div class='links'>
+                        <p><a href=https://discord.gg/dhcPSMt>Discord</a></p>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </footer>
+        <script src='blog.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+        <script>
+            // 1. Define the fix function
+            function fixCSharpRegions() {
+                if (!Prism.languages.csharp) return; // Safety check
+
+                Prism.languages.insertBefore('csharp', 'comment', {
+                    'region-directive': {
+                        // Matches the entire line starting with #
+                        pattern: /^\s*#.*/m,
+                        alias: 'comment', // Colors the whole line like a comment (usually gray)
+                        inside: {
+                            'keyword': {
+                                // Highlights #region, #if, #endif in the keyword color (usually purple/blue)
+                                pattern: /^(\s*)#(?:region|endregion|if|else|elif|endif|define|undef|warning|error|line|pragma)/,
+                                lookbehind: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 2. Apply it based on how you loaded Prism
+            // If you used the MANUAL script tags I recommended first:
+            fixCSharpRegions();
+
+            // If you are using the AUTOLOADER (Option 2):
+            // We must wait for the autoloader to finish fetching C#
+            if (Prism.plugins.autoloader) {
+                Prism.plugins.autoloader.languages_loaded = function(langs) {
+                    if (langs.includes('csharp')) fixCSharpRegions();
+                };
+            }
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+    </body>
+</html>

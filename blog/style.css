@@ -4,6 +4,16 @@ body{
     margin: 0px;
     font-family: 'Sarabun', sans-serif;
     font-size: 1.5em;
+    /*text-align: center;*/
+}
+.note{
+    color: #666666;
+    font-style: italic;
+}
+#content{
+    margin: 0em 5em 0em 5em;
+}
+#timestamps{
     text-align: center;
 }
 h1{
@@ -35,17 +45,27 @@ h1{
     padding: 1em;
     margin: 0px;
     margin-bottom: 9rem;
+    text-align: center;
+}
+h2{
+    text-align: center;
 }
 h3{
     font-size: 1.3em;
+}
+h4{
+    font-size: 1.15em;
+    margin-left: 1.2em;
+    margin-right: 1.2em;
+}
+img{
+    margin-left: 2em;
+    margin-right: 2em;
 }
 .button-link{
     text-decoration: none;
     color: #111111;
     font-size: 1.2em; 
-}
-h1{
-    text-align: center;
 }
 #timestamps{
     display: grid;
@@ -82,4 +102,15 @@ p{
 ul{
     text-align: left;
     padding-left: 6em;
+}
+pre{
+    margin-left: 2em !important;
+}
+.code{
+    /*display: inline-block;*/
+    font-family: 'Courier Prime', monospace;
+    background-color: #EEEEEE;
+    /*border: 0.1em #555555 solid;*/
+    padding: 0em 0.1em 0em 0.1em;
+    border-radius: 0.2em;
 }

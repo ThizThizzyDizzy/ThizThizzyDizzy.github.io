@@ -36,6 +36,17 @@
             "path": "pimax_play_version_archive",
             "created": "2025-04-16",
             "modified": "2025-11-27"
+        },
+        {
+            "tags": [
+                "dizzyrpc",
+                "vr",
+                "vrchat"
+            ],
+            "title": "DizzyRPC (Beta)",
+            "path": "DizzyRPC_initial_beta_release",
+            "created": "2025-11-27",
+            "modified": "2025-11-27"
         }
     ]
 }
